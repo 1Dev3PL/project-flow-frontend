@@ -1,0 +1,36 @@
+@use "shared/styles/variables" as *;
+
+.open_button {
+  font-family: "OpenSans", sans-serif;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 1em;
+  border-radius: 10px;
+  text-decoration: none;
+  color: $base-white;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $base-glass;
+  }
+
+  .icon {
+    height: 1em;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  .button_container {
+    align-self: flex-end;
+    margin-top: 2em;
+  }
+}

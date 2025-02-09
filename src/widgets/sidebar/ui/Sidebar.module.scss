@@ -1,0 +1,27 @@
+@use "shared/styles/variables" as *;
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $base-glass;
+  backdrop-filter: blur(15px);
+  width: 250px;
+  padding: 30px 20px;
+  box-sizing: border-box;
+
+  .logo_container {
+    display: flex;
+    justify-content: center;
+    .logo {
+      width: 100px;
+    }
+  }
+
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0 20px;
+  }
+}

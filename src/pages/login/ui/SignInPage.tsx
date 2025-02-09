@@ -20,12 +20,12 @@ export const SignInPage = () => {
   } = useForm<TForm>({ mode: "onSubmit", reValidateMode: "onSubmit" });
   const signIn = useSignIn();
 
-  const handleLogin: SubmitHandler<TForm> = (data, event) => {
+  const handleLogin: SubmitHandler<TForm> = (formData, event) => {
     event?.preventDefault();
 
     const signInData: SignInData = {
-      email: data.email,
-      password: data.password,
+      email: formData.email,
+      password: formData.password,
     };
 
     signIn(signInData);

@@ -1,0 +1,30 @@
+@use "shared/styles/variables" as *;
+
+.modal_header {
+  display: flex;
+  justify-content: end;
+  align-items: start;
+  padding-bottom: 2em;
+
+  .title {
+    font-size: 2rem;
+    font-weight: 400;
+    color: $base-blue;
+    margin: 0;
+    flex: 1;
+  }
+
+  .close_button {
+    background-color: transparent;
+    border: none;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    cursor: pointer;
+    justify-self: flex-end;
+
+    .close_icon {
+      width: 100%;
+    }
+  }
+}

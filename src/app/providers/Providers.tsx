@@ -1,5 +1,15 @@
 import { ReactNode } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  MutationCache,
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+import { router } from "app/router/Router.tsx";
+import { RouterProvider } from "react-router";
+import { AxiosError } from "axios";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -8,13 +18,35 @@ const queryClient = new QueryClient({
       refetchOnMount: false,
       refetchOnReconnect: false,
       retry: false,
-      staleTime: 5 * 1000,
+      retryOnMount: false,
+      staleTime: 60 * 1000,
     },
   },
+  queryCache: new QueryCache({
+    onError: (error) => {
+      const err = error as AxiosError;
+      if (err.response?.status === 401) {
+        router.navigate("login", { replace: true });
+      }
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      const err = error as AxiosError;
+      if (err.response?.status === 401) {
+        router.navigate("login", { replace: true });
+      }
+    },
+  }),
 });
 
-export const Providers = ({ children }: { children: ReactNode }) => {
+export const Providers = ({ children }: { children?: ReactNode }) => {
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      {children}
+      <RouterProvider router={router} />
+      <ReactQueryDevtools initialIsOpen={false} />
+      <Toaster position="bottom-right" reverseOrder={false} />
+    </QueryClientProvider>
   );
 };

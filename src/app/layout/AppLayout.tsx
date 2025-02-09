@@ -1,12 +1,17 @@
 import { useUser } from "entities/user";
-import { Navigate, Outlet } from "react-router";
+import { Outlet } from "react-router";
+import { Sidebar } from "widgets/sidebar";
+import style from "./AppLayout.module.scss"
 
 export const AppLayout = () => {
-  const { user, isError, isLoading, isFetching } = useUser();
+  const { isError, isLoading } = useUser();
 
-  if (!user && isError) return <Navigate to={"/login"} replace />;
+  if (isLoading || isError) return <>Loading...</>
 
-  if (isLoading || isFetching) return <>Loading...</>
-
-  return <Outlet />;
+  return (
+    <div className={style.page_layout}>
+      <Sidebar/>
+      <Outlet />
+    </div>
+  );
 };

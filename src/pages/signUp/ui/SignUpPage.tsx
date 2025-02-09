@@ -24,13 +24,13 @@ export const SignUpPage = () => {
   const password = watch("password");
   const signUp = useSignUp();
 
-  const handleRegister: SubmitHandler<TForm> = (data, event) => {
+  const handleRegister: SubmitHandler<TForm> = (formData, event) => {
     event?.preventDefault();
 
     const signUpData: SignUpData = {
-      name: data.name,
-      email: data.email,
-      password: data.password,
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
     };
 
     signUp(signUpData);
