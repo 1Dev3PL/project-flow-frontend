@@ -18,7 +18,7 @@ export const SignInPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<TForm>({ mode: "onSubmit", reValidateMode: "onSubmit" });
-  const signIn = useSignIn();
+  const { signInMutation, isPending } = useSignIn();
 
   const handleLogin: SubmitHandler<TForm> = (formData, event) => {
     event?.preventDefault();
@@ -28,7 +28,7 @@ export const SignInPage = () => {
       password: formData.password,
     };
 
-    signIn(signInData);
+    signInMutation(signInData);
   };
 
   return (
@@ -80,7 +80,7 @@ export const SignInPage = () => {
               error={errors.password?.message}
             />
             <div className={style.button_container}>
-              <Button type={"submit"} variant={"outlined"}>
+              <Button type={"submit"} variant={"outlined"} loading={isPending}>
                 Войти
               </Button>
             </div>

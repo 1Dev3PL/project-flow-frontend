@@ -9,11 +9,11 @@ const CustomDialog = styled(Dialog)(() => ({
   },
   "& .MuiDialog-paper": {
     backgroundColor: "rgba(255, 255, 255, 0.10)",
-    backdropFilter: "blur(8px)",
+    backdropFilter: "blur(15px)",
     borderRadius: "30px",
     color: "rgba(255, 255, 255, 0.87)",
     padding: "2em",
-    width: "1000px"
+    width: "1000px",
   },
 }));
 
@@ -25,7 +25,8 @@ interface Props {
 }
 
 export const Modal = (props: Props) => {
-  const {open, onClose, title, children} = props
+  const { open, onClose, title, children } = props;
+
   return (
     <>
       <CustomDialog open={open} onClose={onClose}>

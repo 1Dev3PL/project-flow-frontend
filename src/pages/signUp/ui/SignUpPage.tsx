@@ -22,7 +22,7 @@ export const SignUpPage = () => {
     formState: { errors },
   } = useForm<TForm>({ mode: "onSubmit", reValidateMode: "onSubmit" });
   const password = watch("password");
-  const signUp = useSignUp();
+  const { signUpMutation, isPending } = useSignUp();
 
   const handleRegister: SubmitHandler<TForm> = (formData, event) => {
     event?.preventDefault();
@@ -33,7 +33,7 @@ export const SignUpPage = () => {
       password: formData.password,
     };
 
-    signUp(signUpData);
+    signUpMutation(signUpData);
   };
 
   return (
@@ -107,7 +107,7 @@ export const SignUpPage = () => {
               />
             </div>
             <div className={style.button_container}>
-              <Button type={"submit"} variant={"outlined"}>
+              <Button type={"submit"} variant={"outlined"} loading={isPending}>
                 Зарегистрироваться
               </Button>
             </div>

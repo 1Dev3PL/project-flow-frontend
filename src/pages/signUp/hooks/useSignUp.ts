@@ -10,7 +10,11 @@ export const useSignUp = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const { mutate: signUpMutation } = useMutation<User, AxiosError, SignUpData>({
+  const { mutate: signUpMutation, isPending } = useMutation<
+    User,
+    AxiosError,
+    SignUpData
+  >({
     mutationFn: (signUpData) => signUp(signUpData),
     onSuccess: (data) => {
       queryClient.setQueryData(["user"], data);
@@ -23,5 +27,5 @@ export const useSignUp = () => {
     },
   });
 
-  return signUpMutation;
+  return { signUpMutation, isPending };
 };

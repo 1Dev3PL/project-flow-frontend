@@ -4,11 +4,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1em;
   flex: 1;
 
   .label {
     color: $base-grey;
+    margin-bottom: 1em;
   }
 
   .input {
@@ -34,6 +34,7 @@
 
   .validation_message {
     color: $base-error;
-    margin: 0;
+    font-size: 0.9em;
+    margin: 0.5em 0 0;
   }
 }

@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createProject } from "features/createProjectButton/api/createProject.ts";
 import toast from "react-hot-toast";
 import { Project } from "entities/project";
 import { AxiosError } from "axios";
+import { createProject } from "features/createProjectModal/api/api.ts";
 
-export interface CreateProjectData {
+interface CreateProjectData {
   userId: number;
   title: string;
   description: string;
@@ -14,7 +14,7 @@ export interface CreateProjectData {
 export const useCreateProject = () => {
   const queryClient = useQueryClient();
 
-  const { mutate: createProjectMutation } = useMutation<
+  const { mutate: createProjectMutation, isPending } = useMutation<
     Project,
     AxiosError,
     CreateProjectData
@@ -30,5 +30,5 @@ export const useCreateProject = () => {
     },
   });
 
-  return createProjectMutation;
+  return { createProjectMutation, isPending };
 };

@@ -7,20 +7,21 @@ interface Props {
   to: string;
   icon?: string;
   children?: string;
+  end?: boolean;
 }
 
 export const NavButton = (props: Props) => {
-  const {
-    className,
-    children,
-    to,
-    icon,
-  } = props;
+  const { className, children, to, icon, end = false } = props;
 
   return (
     <NavLink
-      className={classNames(style.nav_button, className)}
+      className={({ isActive }) => {
+        return classNames(style.nav_button, className, {
+          [style.nav_button_active]: isActive,
+        });
+      }}
       to={to}
+      end={end}
     >
       {icon && <img className={style.icon} src={icon} alt={""} />}
       {children}

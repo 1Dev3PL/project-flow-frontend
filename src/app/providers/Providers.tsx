@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Suspense } from "react";
 import {
   MutationCache,
   QueryCache,
@@ -26,7 +26,7 @@ const queryClient = new QueryClient({
     onError: (error) => {
       const err = error as AxiosError;
       if (err.response?.status === 401) {
-        router.navigate("login", { replace: true });
+        router.navigate("/login", { replace: true });
       }
     },
   }),
@@ -34,17 +34,18 @@ const queryClient = new QueryClient({
     onError: (error) => {
       const err = error as AxiosError;
       if (err.response?.status === 401) {
-        router.navigate("login", { replace: true });
+        router.navigate("/login", { replace: true });
       }
     },
   }),
 });
 
-export const Providers = ({ children }: { children?: ReactNode }) => {
+export const Providers = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      {children}
-      <RouterProvider router={router} />
+      <Suspense fallback={<>Loading...</>}>
+        <RouterProvider router={router} />
+      </Suspense>
       <ReactQueryDevtools initialIsOpen={false} />
       <Toaster position="bottom-right" reverseOrder={false} />
     </QueryClientProvider>

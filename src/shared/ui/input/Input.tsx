@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import style from "./Input.module.scss";
-import React, { ChangeEvent, useId } from "react";
-import { UseFormRegister } from "react-hook-form";
+import React, { ChangeEvent, ReactElement, Ref, useId } from "react";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
-type Props = {
+type Props<T extends FieldValues> = {
   className?: string;
   placeholder?: string;
   value?: string;
@@ -11,9 +11,12 @@ type Props = {
   label?: string;
   type?: string;
   error?: string;
-} & ReturnType<UseFormRegister<never>>;
+} & ReturnType<UseFormRegister<T>>;
 
-export const Input = React.forwardRef((props: Props, ref) => {
+const InputWithRef = <T extends FieldValues>(
+  props: Omit<Props<T>, "ref">,
+  ref: Ref<HTMLInputElement>,
+) => {
   const {
     className,
     placeholder,
@@ -40,8 +43,15 @@ export const Input = React.forwardRef((props: Props, ref) => {
         value={value}
         onChange={onChange}
         id={inputId}
+        aria-invalid={error ? "true" : "false"}
       />
       {error && <p className={style.validation_message}>{error}</p>}
     </div>
   );
-});
+};
+
+export const Input = React.forwardRef(InputWithRef) as <T extends FieldValues>(
+  props: Props<T> & {
+    ref?: Ref<HTMLInputElement>;
+  },
+) => ReactElement;
