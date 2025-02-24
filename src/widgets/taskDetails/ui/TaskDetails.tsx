@@ -2,7 +2,7 @@ import { Drawer } from "@mui/material";
 import { useTask } from "entities/task";
 
 interface Props {
-  taskId: number | null;
+  taskId: string | null;
   open: boolean;
   handleClose: () => void;
 }

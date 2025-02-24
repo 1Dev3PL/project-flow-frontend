@@ -5,7 +5,7 @@ import { AxiosError } from "axios";
 import { createProject } from "features/createProjectModal/api/api.ts";
 
 interface CreateProjectData {
-  userId: number;
+  userId: string;
   title: string;
   description: string;
   key: string;

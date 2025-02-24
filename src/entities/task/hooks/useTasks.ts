@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getTasks } from "entities/task/api/api.ts";
 
-export const useTasks = (projectId: number) => {
+export const useTasks = (projectId: string) => {
   const {
     data: tasks,
     isLoading,

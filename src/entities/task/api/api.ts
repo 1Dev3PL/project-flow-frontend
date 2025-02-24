@@ -2,7 +2,7 @@ import { apiInstance } from "shared/api";
 import { Task, TasksListData } from "entities/task/api/types.ts";
 
 export const getTasks = async (
-  projectId: number,
+  projectId: string,
   { page }: { page: number },
 ): Promise<TasksListData> => {
   return await apiInstance
@@ -10,6 +10,6 @@ export const getTasks = async (
     .then((res) => res.data);
 };
 
-export const getTask = async (taskId: number): Promise<Task> => {
+export const getTask = async (taskId: string): Promise<Task> => {
   return await apiInstance.get(`/tasks/${taskId}`).then((res) => res.data);
 };

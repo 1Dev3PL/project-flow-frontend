@@ -15,7 +15,7 @@ type TForm = {
   description: string;
   type: ETaskType;
   priority: ETaskPriority;
-  executorId: number;
+  executorId: string;
 };
 
 export const AddTaskButton = () => {
@@ -43,7 +43,7 @@ export const AddTaskButton = () => {
     event?.preventDefault();
 
     const data = {
-      projectId: +projectId!,
+      projectId: projectId!,
       authorId: user.id,
       title: formData.title,
       description: formData.description,

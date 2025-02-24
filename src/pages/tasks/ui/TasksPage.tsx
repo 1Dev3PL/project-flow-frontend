@@ -14,10 +14,10 @@ import { CircularProgress } from "@mui/material";
 export const TasksPage = () => {
   const { projectId } = useParams();
   const { tasks, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useTasks(+projectId!);
+    useTasks(projectId!);
   const { ref, inView } = useInView();
   const [open, setOpen] = useState(false);
-  const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null);
+  const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
 
   useEffect(() => {
     if (inView) {
@@ -25,7 +25,7 @@ export const TasksPage = () => {
     }
   }, [inView, fetchNextPage]);
 
-  const handleOpen = (taskId: number) => {
+  const handleOpen = (taskId: string) => {
     setSelectedTaskId(taskId);
     setOpen(true);
   };

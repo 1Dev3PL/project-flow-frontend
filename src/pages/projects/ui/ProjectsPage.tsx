@@ -19,7 +19,7 @@ export const ProjectsPage = () => {
     return (
       <>
         {projects?.map((project) => (
-          <Link to={`${project.id}/tasks`}>
+          <Link to={`${project.id}/tasks`} key={project.id}>
             <div
               className={classNames(style.card, style.project_card)}
               key={project.id}

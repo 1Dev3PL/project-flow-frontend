@@ -4,7 +4,7 @@ import { CreateProjectData } from "features/createProjectModal/api/types.ts";
 
 export const createProject = async (
   projectData: CreateProjectData,
-  userId: number,
+  userId: string,
 ): Promise<Project> => {
   return await apiInstance
     .post(`/projects?userId=${userId}`, projectData)

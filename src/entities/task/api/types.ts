@@ -5,7 +5,7 @@ import {
 } from "shared/constants/task.ts";
 
 export type Task = {
-  id: number;
+  id: string;
   key: string;
   projectId: number;
   title: string;
