@@ -1,0 +1,29 @@
+@use "shared/styles/variables" as *;
+
+.drawer {
+  position: fixed;
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-color: $base-glass;
+  backdrop-filter: blur(15px);
+
+  .header {
+    display: flex;
+    justify-content: end;
+    margin: 1.5em 2em;
+
+    .close_button {
+      background-color: transparent;
+      border: none;
+      padding: 0;
+      height: 30px;
+      cursor: pointer;
+
+      .close_icon {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}

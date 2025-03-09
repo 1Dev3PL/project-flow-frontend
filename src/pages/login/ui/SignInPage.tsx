@@ -1,7 +1,6 @@
 import logo from "shared/assets/images/logo.svg";
 import { Link } from "react-router";
-import { Input } from "shared/ui/input";
-import { Button } from "shared/ui/button";
+import { Input, Button } from "shared/ui";
 import style from "./SignInPage.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSignIn } from "pages/login/hooks/useSignIn.ts";
@@ -58,7 +57,7 @@ export const SignInPage = () => {
               type={"email"}
               label={"Email"}
               placeholder={"email@example.com"}
-              {...register("email", {
+              register={register("email", {
                 required: "Введите email",
                 pattern: {
                   value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -70,7 +69,7 @@ export const SignInPage = () => {
             <Input
               type={"password"}
               label={"Пароль"}
-              {...register("password", {
+              register={register("password", {
                 required: "Введите пароль",
                 minLength: {
                   value: 8,

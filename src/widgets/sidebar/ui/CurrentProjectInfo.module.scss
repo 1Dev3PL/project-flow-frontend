@@ -1,0 +1,46 @@
+@use "shared/styles/variables" as *;
+
+.container {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: $base-white;
+  background-color: $base-glass;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $base-glass-hover;
+  }
+
+  .image_container {
+    height: 100%;
+    background-color: $base-glass;
+    clip-path: circle();
+    flex: 0 0 40px;
+
+    .image {
+
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    width: 100%;
+
+    .label {
+      color: $base-grey;
+    }
+
+    .project_title {
+      font-size: 1.5em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}

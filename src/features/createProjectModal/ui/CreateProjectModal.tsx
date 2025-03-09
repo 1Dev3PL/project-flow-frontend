@@ -1,10 +1,8 @@
-import { Input } from "shared/ui/input";
+import { Input, Modal, Button } from "shared/ui";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Modal } from "shared/ui/modal";
 import style from "./CreateProjectModal.module.scss";
-import { Button } from "shared/ui/button";
-import { useUser } from "entities/user";
-import { useCreateProject } from "features/createProjectModal/hooks/useCreateProject.ts";
+import { useAuth } from "entities/user";
+import { useCreateProject } from "../hooks/useCreateProject.ts";
 
 type TForm = {
   title: string;
@@ -26,7 +24,7 @@ export const CreateProjectModal = (props: Props) => {
     formState: { errors },
   } = useForm<TForm>();
   const { createProjectMutation, isPending } = useCreateProject();
-  const user = useUser();
+  const user = useAuth();
 
   const handleModalClose = () => {
     reset();
@@ -60,16 +58,16 @@ export const CreateProjectModal = (props: Props) => {
           <Input
             label={"Название проекта"}
             placeholder={"New Project"}
-            {...register("title")}
+            register={register("title")}
           />
           <Input
             label={"Описание проекта"}
             placeholder={"Введите описание проекта"}
-            {...register("description")}
+            register={register("description")}
           />
           <Input
             label={"Ключ"}
-            {...register("key", {
+            register={register("key", {
               maxLength: {
                 value: 10,
                 message: "Ключ не может быть длиннее 10 символов",

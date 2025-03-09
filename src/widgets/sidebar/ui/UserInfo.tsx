@@ -1,10 +1,10 @@
 import { Link } from "react-router";
 import style from "./UserInfo.module.scss";
-import { useUser } from "entities/user";
+import { useAuth } from "entities/user";
 import avatarDefault from "shared/assets/icons/avatar.svg";
 
 export const UserInfo = () => {
-  const user = useUser();
+  const user = useAuth();
 
   return (
     <Link to={`/profile/${user.id}`} className={style.user_info}>

@@ -1,19 +1,18 @@
 import style from "./ProjectsPage.module.scss";
 import { Link } from "react-router";
-import { Page } from "shared/ui/page";
-import { PageTitle } from "shared/ui/pageTitle";
+import { Page, PageTitle } from "shared/ui";
 import addBigIcon from "shared/assets/icons/addBig.svg";
 import { useState } from "react";
 import { CreateProjectModal } from "features/createProjectModal";
 import { useProjects } from "entities/project";
-import { useUser } from "entities/user";
+import { useAuth } from "entities/user";
 import { CircularProgress } from "@mui/material";
 import classNames from "classnames";
 
 export const ProjectsPage = () => {
   const [open, setOpen] = useState(false);
-  const user = useUser();
-  const { projects, isLoading } = useProjects(user.id);
+  const user = useAuth();
+  const { projects, isFetching } = useProjects(user.id);
 
   const renderProjects = () => {
     return (
@@ -24,7 +23,9 @@ export const ProjectsPage = () => {
               className={classNames(style.card, style.project_card)}
               key={project.id}
             >
-              <p className={style.title}>{project.title}</p>
+              <p className={style.title} title={project.title}>
+                {project.title}
+              </p>
             </div>
           </Link>
         ))}
@@ -35,7 +36,6 @@ export const ProjectsPage = () => {
           <img src={addBigIcon} className={style.icon} alt={""} />
           <span>Создать проект</span>
         </div>
-        <CreateProjectModal open={open} handleClose={() => setOpen(false)} />
       </>
     );
   };
@@ -44,7 +44,7 @@ export const ProjectsPage = () => {
     <Page>
       <PageTitle>Все проекты</PageTitle>
       <div className={style.content}>
-        {isLoading ? (
+        {isFetching ? (
           <div className={style.loader}>
             <CircularProgress color={"inherit"} />
           </div>
@@ -52,6 +52,7 @@ export const ProjectsPage = () => {
           renderProjects()
         )}
       </div>
+      <CreateProjectModal open={open} handleClose={() => setOpen(false)} />
     </Page>
   );
 };

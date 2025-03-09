@@ -1,9 +1,9 @@
 import { Project } from "entities/project/api/types.ts";
 import { apiInstance } from "shared/api";
-import { CreateProjectData } from "features/createProjectModal/api/types.ts";
+import { TNewProjectData } from "./types.ts";
 
 export const createProject = async (
-  projectData: CreateProjectData,
+  projectData: TNewProjectData,
   userId: string,
 ): Promise<Project> => {
   return await apiInstance

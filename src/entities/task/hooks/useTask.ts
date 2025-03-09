@@ -3,11 +3,11 @@ import { getTask } from "entities/task/api/api.ts";
 import { Task } from "entities/task";
 
 export const useTask = (taskId: string | null) => {
-  const { data: task } = useQuery<Task>({
+  const { data: task, isLoading } = useQuery<Task>({
     queryKey: ["task", taskId],
     queryFn: () => getTask(taskId!),
     enabled: !!taskId,
   });
 
-  return { task };
+  return { task, isLoading };
 };

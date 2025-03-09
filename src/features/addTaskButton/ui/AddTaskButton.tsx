@@ -1,20 +1,16 @@
-import { Button } from "shared/ui/button";
+import { Button, Modal, Input, Select } from "shared/ui";
 import { useState } from "react";
-import { Modal } from "shared/ui/modal";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useUser } from "entities/user";
-import { Input } from "shared/ui/input";
-import { useParams } from "react-router";
+import { useAuth } from "entities/user";
 import style from "./AddTaskButton.module.scss";
 import addFilledIcon from "shared/assets/icons/addFilled.svg";
-import { useAddTask } from "features/addTaskButton/hooks/useAddTask.ts";
-import { ETaskPriority, ETaskType } from "shared/constants/task.ts";
+import { useAddTask } from "../hooks/useAddTask";
+import { taskPriorityOptions, taskTypeOptions } from "shared/constants";
+import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
 
 type TForm = {
   title: string;
   description: string;
-  type: ETaskType;
-  priority: ETaskPriority;
   executorId: string;
 };
 
@@ -26,8 +22,14 @@ export const AddTaskButton = () => {
     reset,
     formState: { errors },
   } = useForm<TForm>();
-  const user = useUser();
-  const { projectId } = useParams();
+  const [selectedTaskType, setSelectedTaskType] = useState(
+    taskTypeOptions[0].value,
+  );
+  const [selectedTaskPriority, setSelectedTaskPriority] = useState(
+    taskPriorityOptions[2].value,
+  );
+  const user = useAuth();
+  const projectId = useCurrentProjectStore((state) => state.currentProjectId);
   const { addTaskMutation, isPending } = useAddTask();
 
   const handleOpen = () => {
@@ -47,8 +49,8 @@ export const AddTaskButton = () => {
       authorId: user.id,
       title: formData.title,
       description: formData.description,
-      type: formData.type,
-      priority: formData.priority,
+      type: selectedTaskType,
+      priority: selectedTaskPriority,
       executorId: formData.executorId,
     };
 
@@ -63,28 +65,34 @@ export const AddTaskButton = () => {
       <Modal open={open} onClose={handleClose} title={"Новая задача"}>
         <form className={style.form} onSubmit={handleSubmit(handleAddTask)}>
           <Input
-            {...register("title", { required: "Введите название" })}
+            register={register("title", { required: "Введите название" })}
             label={"Название"}
             placeholder={"Название задачи"}
             error={errors.title?.message}
           />
           <Input
-            {...register("description")}
+            register={register("description")}
             label={"Описание"}
             placeholder={"Описание задачи"}
           />
-          <select {...register("type")} defaultValue={ETaskType.TASK}>
-            <option value={ETaskType.TASK}>Задача</option>
-            <option value={ETaskType.BUG}>Баг</option>
-            <option value={ETaskType.STORY}>История</option>
-            <option value={ETaskType.EPIC}>Эпик</option>
-          </select>
-          <select {...register("priority")} defaultValue={ETaskPriority.MEDIUM}>
-            <option value={ETaskPriority.CRITICAL}>Критический</option>
-            <option value={ETaskPriority.HIGH}>Высокий</option>
-            <option value={ETaskPriority.MEDIUM}>Средний</option>
-            <option value={ETaskPriority.LOW}>Низкий</option>
-          </select>
+          <div className={style.selectors_group}>
+            <div className={style.selector_container}>
+              <span className={style.selector_label}>Тип:</span>
+              <Select
+                options={taskTypeOptions}
+                selected={selectedTaskType}
+                onChange={setSelectedTaskType}
+              />
+            </div>
+            <div className={style.selector_container}>
+              <span className={style.selector_label}>Приоритет:</span>
+              <Select
+                options={taskPriorityOptions}
+                selected={selectedTaskPriority}
+                onChange={setSelectedTaskPriority}
+              />
+            </div>
+          </div>
           <div className={style.button_container}>
             <Button type={"submit"} loading={isPending}>
               Создать задачу

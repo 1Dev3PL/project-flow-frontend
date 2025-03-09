@@ -1,7 +1,6 @@
-import { Input } from "shared/ui/input";
+import { Button, Input } from "shared/ui";
 import style from "./SignUpPage.module.scss";
 import { Link } from "react-router";
-import { Button } from "shared/ui/button";
 import logo from "shared/assets/images/logo.svg";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useSignUp } from "pages/signUp/hooks/useSignUp.ts";
@@ -61,14 +60,14 @@ export const SignUpPage = () => {
             <Input
               placeholder={"Ильин Иван"}
               label={"Имя"}
-              {...register("name", { required: "Введите имя" })}
+              register={register("name", { required: "Введите имя" })}
               error={errors.name?.message}
             />
             <Input
               type={"email"}
               placeholder={"email@example.com"}
               label={"Email"}
-              {...register("email", {
+              register={register("email", {
                 required: "Введите email",
                 pattern: {
                   value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
@@ -81,7 +80,7 @@ export const SignUpPage = () => {
               <Input
                 type={"password"}
                 label={"Пароль"}
-                {...register("password", {
+                register={register("password", {
                   required: "Введите пароль",
                   minLength: {
                     value: 8,
@@ -93,7 +92,7 @@ export const SignUpPage = () => {
               <Input
                 type={"password"}
                 label={"Повторите пароль"}
-                {...register("passwordRepeat", {
+                register={register("passwordRepeat", {
                   required: "Повторите пароль",
                   minLength: {
                     value: 8,

@@ -2,8 +2,6 @@
 
 .modal_header {
   display: flex;
-  justify-content: end;
-  align-items: start;
   padding-bottom: 2em;
 
   .title {
@@ -16,15 +14,15 @@
 
   .close_button {
     background-color: transparent;
+    align-self: flex-start;
     border: none;
-    width: 30px;
     height: 30px;
     padding: 0;
     cursor: pointer;
-    justify-self: flex-end;
 
     .close_icon {
-      width: 100%;
+      width: 30px;
+      height: 30px;
     }
   }
 }

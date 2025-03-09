@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "features/addTaskButton/api/api.ts";
-import { AddTaskRequestData } from "features/addTaskButton/api/types.ts";
+import { api } from "../api/api.ts";
+import { AddTaskRequestData } from "../api/types.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { Task } from "entities/task";

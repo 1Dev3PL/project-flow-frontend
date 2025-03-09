@@ -1,5 +1,4 @@
-import { Page } from "shared/ui/page";
-import { PageTitle } from "shared/ui/pageTitle";
+import { Page, PageTitle } from "shared/ui";
 import style from "./DashboardPage.module.scss";
 import { AddTaskButton } from "features/addTaskButton";
 

@@ -1,0 +1,28 @@
+@use "shared/styles/variables" as *;
+
+.option {
+  display: flex;
+  gap: 0.8em;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &_selected {
+    background-color: $base-glass;
+  }
+
+  &:hover {
+    background-color: $base-glass_hover;
+  }
+
+  &:last-child {
+    border-radius: 0 0 10px 10px;
+  }
+
+  .icon {
+    height: 1.5em;
+    max-width: 1.5em;
+  }
+}

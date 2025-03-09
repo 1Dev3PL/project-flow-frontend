@@ -6,3 +6,9 @@ export const getProjects = async (userId: string): Promise<Project[]> => {
     .get(`/projects?userId=${userId}`)
     .then((res) => res.data);
 };
+
+export const getProject = async (projectId: string): Promise<Project> => {
+  return await apiInstance
+    .get(`/projects/${projectId}`)
+    .then((res) => res.data);
+};

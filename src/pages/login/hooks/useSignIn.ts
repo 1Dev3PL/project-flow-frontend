@@ -5,10 +5,14 @@ import { signIn } from "pages/login/api/signIn.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 import { User } from "entities/user";
+import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
 
 export const useSignIn = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const removeCurrentProjectId = useCurrentProjectStore(
+    (state) => state.removeCurrentProjectId,
+  );
 
   const { mutate: signInMutation, isPending } = useMutation<
     User,
@@ -16,8 +20,12 @@ export const useSignIn = () => {
     SignInData
   >({
     mutationFn: (signInData) => signIn(signInData),
+    onMutate: () => {
+      queryClient.removeQueries();
+    },
     onSuccess: (data) => {
-      queryClient.setQueryData(["user"], data);
+      queryClient.setQueryData(["auth"], data);
+      removeCurrentProjectId();
       navigate("/");
     },
     onError: (error) => {

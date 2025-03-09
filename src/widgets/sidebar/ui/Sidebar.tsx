@@ -1,19 +1,18 @@
 import style from "./Sidebar.module.scss";
 import logo from "shared/assets/images/logo.svg";
-import { NavButton } from "shared/ui/navButton";
+import { NavButton } from "shared/ui";
 import dashboardIcon from "shared/assets/icons/dashboard.svg";
 import tasksIcon from "shared/assets/icons/tasks.svg";
 import usersIcon from "shared/assets/icons/users.png";
 import folderIcon from "shared/assets/icons/folder.svg";
-import { UserInfo } from "features/userInfo";
-import createIcon from "shared/assets/icons/add.svg";
-import { useState } from "react";
-import { CreateProjectModal } from "features/createProjectModal";
-import { useParams } from "react-router";
+import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
+import { CurrentProjectInfo } from "./CurrentProjectInfo.tsx";
+import { UserInfo } from "./UserInfo";
 
 export const Sidebar = () => {
-  const [open, setOpen] = useState(false);
-  const { projectId } = useParams();
+  const currentProjectId = useCurrentProjectStore(
+    (state) => state.currentProjectId,
+  );
 
   return (
     <aside className={style.sidebar}>
@@ -21,27 +20,33 @@ export const Sidebar = () => {
         <img className={style.logo} src={logo} alt={"Logo"} />
       </div>
       <nav className={style.navigation}>
-        <NavButton to={`projects/${projectId}/dashboard`} icon={dashboardIcon}>
-          Доска
-        </NavButton>
-        <NavButton to={`projects/${projectId}/tasks`} icon={tasksIcon}>
-          Задачи
-        </NavButton>
-        <NavButton to={`projects/${projectId}/users`} icon={usersIcon}>
-          Пользователи
-        </NavButton>
+        {currentProjectId && (
+          <>
+            <NavButton
+              to={`projects/${currentProjectId}/dashboard`}
+              icon={dashboardIcon}
+            >
+              Доска
+            </NavButton>
+            <NavButton
+              to={`projects/${currentProjectId}/tasks`}
+              icon={tasksIcon}
+            >
+              Задачи
+            </NavButton>
+            <NavButton
+              to={`projects/${currentProjectId}/users`}
+              icon={usersIcon}
+            >
+              Пользователи
+            </NavButton>
+          </>
+        )}
         <NavButton to={`projects`} icon={folderIcon} end>
           Все проекты
         </NavButton>
       </nav>
-      <button
-        onClick={() => setOpen(true)}
-        className={style.create_project_button}
-      >
-        <img className={style.icon} src={createIcon} alt={""} />
-        Создать проект
-      </button>
-      <CreateProjectModal open={open} handleClose={() => setOpen(false)} />
+      <CurrentProjectInfo />
       <UserInfo />
     </aside>
   );

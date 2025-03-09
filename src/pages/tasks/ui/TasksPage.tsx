@@ -1,38 +1,65 @@
-import { Page } from "shared/ui/page";
-import { PageTitle } from "shared/ui/pageTitle";
+import {
+  Page,
+  PageTitle,
+  TaskType,
+  TaskPriority,
+  Select,
+  TSelectOption,
+} from "shared/ui";
 import { AddTaskButton } from "features/addTaskButton";
 import style from "./TasksPage.module.scss";
-import { useTasks } from "entities/task";
-import { useParams } from "react-router";
+import { ESortBy, ESortOrder, TSortOptions, useTasks } from "entities/task";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TaskDetails } from "widgets/taskDetails";
-import { TaskType } from "shared/ui/taskType";
-import { TaskPriority } from "shared/ui/taskPriority";
 import { CircularProgress } from "@mui/material";
+import arrowDown from "shared/assets/icons/arrowDown.svg";
+import arrowUp from "shared/assets/icons/arrowUp.svg";
+import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
+
+const sortOptions: TSelectOption<TSortOptions>[] = [
+  { title: "Название", value: [ESortOrder.ASC, ESortBy.TITLE], icon: arrowUp },
+  {
+    title: "Название",
+    value: [ESortOrder.DESC, ESortBy.TITLE],
+    icon: arrowDown,
+  },
+  {
+    title: "Дата создания",
+    value: [ESortOrder.ASC, ESortBy.CREATED_DATE],
+    icon: arrowUp,
+  },
+  {
+    title: "Дата создания",
+    value: [ESortOrder.DESC, ESortBy.CREATED_DATE],
+    icon: arrowDown,
+  },
+  {
+    title: "Без сортировки",
+    value: null,
+  },
+];
 
 export const TasksPage = () => {
-  const { projectId } = useParams();
-  const { tasks, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useTasks(projectId!);
+  const projectId = useCurrentProjectStore((state) => state.currentProjectId);
   const { ref, inView } = useInView();
-  const [open, setOpen] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
+  const [selectedSortOption, setSelectedSortOption] =
+    useState<TSortOptions | null>(null);
+  const { tasks, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useTasks(projectId, selectedSortOption);
 
   useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [inView, fetchNextPage]);
+    if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
+  }, [inView, fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  const handleOpen = (taskId: string) => {
+  const handleOpen = (e: React.MouseEvent<HTMLDivElement>, taskId: string) => {
+    e.stopPropagation();
     setSelectedTaskId(taskId);
-    setOpen(true);
   };
 
   const handleClose = () => {
     setSelectedTaskId(null);
-    setOpen(false);
   };
 
   const renderTasks = () => {
@@ -43,7 +70,7 @@ export const TasksPage = () => {
             <div
               className={style.task}
               key={task.id}
-              onClick={() => handleOpen(task.id)}
+              onClick={(e) => handleOpen(e, task.id)}
             >
               <div>{task.key}</div>
               <div className={style.task_title} title={task.title}>
@@ -73,6 +100,14 @@ export const TasksPage = () => {
         <PageTitle>Задачи</PageTitle>
         <AddTaskButton />
       </div>
+      <div className={style.list_control}>
+        <Select
+          options={sortOptions}
+          placeholder={"Сортировать по"}
+          selected={selectedSortOption}
+          onChange={setSelectedSortOption}
+        />
+      </div>
       <div className={style.table}>
         <div className={style.table_header}>
           <div>ID</div>
@@ -94,7 +129,7 @@ export const TasksPage = () => {
       </div>
       <TaskDetails
         taskId={selectedTaskId}
-        open={open}
+        open={!!selectedTaskId}
         handleClose={handleClose}
       />
     </Page>

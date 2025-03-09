@@ -1,0 +1,31 @@
+@use "shared/styles/variables" as *;
+
+.content {
+  width: 30vw;
+  padding: 0 2em;
+
+  .task_key {
+    color: $base-grey
+  }
+
+  .task_title {
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+
+  .task_details {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .details_row {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+
+      .row_title {
+        color: $base-grey;
+        align-self: center;
+      }
+    }
+  }
+}

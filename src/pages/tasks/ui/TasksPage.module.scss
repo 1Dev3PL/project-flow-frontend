@@ -6,6 +6,12 @@
   align-items: center;
 }
 
+.list_control {
+  display: flex;
+  margin-bottom: 2em;
+  gap: 1em;
+}
+
 .table {
   display: flex;
   flex-direction: column;
@@ -24,6 +30,7 @@
     backdrop-filter: blur(8px);
     border-radius: 10px;
     font-weight: bold;
+    gap: 1em;
   }
 
   .tasks_list {
@@ -33,6 +40,9 @@
     overflow-y: auto;
     height: 100%;
     text-align: center;
+
+    scrollbar-width: thin;
+    scrollbar-color: $base-grey transparent;
 
     .task {
       display: grid;
@@ -45,6 +55,7 @@
       border: 1px solid $base-glass;
       border-radius: 10px;
       cursor: pointer;
+      gap: 1em;
       transition: background-color 0.2s;
 
       &:hover {

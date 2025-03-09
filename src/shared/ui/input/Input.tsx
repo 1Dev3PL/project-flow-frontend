@@ -7,11 +7,13 @@ type Props<T extends FieldValues> = {
   className?: string;
   placeholder?: string;
   value?: string;
-  onChange?: (e: ChangeEvent) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   label?: string;
   type?: string;
   error?: string;
-} & ReturnType<UseFormRegister<T>>;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  register?: ReturnType<UseFormRegister<T>>;
+};
 
 const InputWithRef = <T extends FieldValues>(
   props: Omit<Props<T>, "ref">,
@@ -25,25 +27,29 @@ const InputWithRef = <T extends FieldValues>(
     label,
     type = "text",
     error,
-    ...rest
+    register,
+    onBlur,
   } = props;
   const inputId = useId();
 
   return (
     <div className={classNames(style.input_container, className)}>
-      <label htmlFor={inputId} className={style.label}>
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={inputId} className={style.label}>
+          {label}
+        </label>
+      )}
       <input
-        {...rest}
         ref={ref}
         type={type}
         className={style.input}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
         id={inputId}
         aria-invalid={error ? "true" : "false"}
+        {...register}
       />
       {error && <p className={style.validation_message}>{error}</p>}
     </div>

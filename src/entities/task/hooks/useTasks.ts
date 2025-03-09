@@ -1,7 +1,11 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getTasks } from "entities/task/api/api.ts";
+import { TSortOptions } from "entities/task";
 
-export const useTasks = (projectId: string) => {
+export const useTasks = (
+  projectId: string | null,
+  sortOptions: TSortOptions | null,
+) => {
   const {
     data: tasks,
     isLoading,
@@ -9,8 +13,9 @@ export const useTasks = (projectId: string) => {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["tasks", projectId],
-    queryFn: (meta) => getTasks(projectId, { page: meta.pageParam }),
+    queryKey: ["tasks", projectId, sortOptions],
+    queryFn: (meta) =>
+      getTasks(projectId!, { page: meta.pageParam }, sortOptions),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _, lastPageParam) => {
       if (lastPage.pagesCount > lastPageParam) {
@@ -19,6 +24,7 @@ export const useTasks = (projectId: string) => {
       return null;
     },
     select: (res) => res.pages.flatMap((page) => page.tasks),
+    enabled: !!projectId
   });
 
   return {
