@@ -9,5 +9,4 @@ export { Portal } from "./portal/Portal.tsx";
 export { Select } from "./select/Select.tsx";
 export { type TSelectOption } from "./select/types.ts";
 export { Skeleton } from "./skeleton/Skeleton.tsx";
-export { TaskPriority } from "./taskPriority/TaskPriority.tsx";
-export { TaskType } from "./taskType/TaskType.tsx";
+export { TextArea } from "./textArea/TextArea.tsx";

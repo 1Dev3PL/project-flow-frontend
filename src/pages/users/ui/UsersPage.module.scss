@@ -1,0 +1,70 @@
+@use "shared/styles/variables" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow-y: auto;
+  height: 100%;
+
+  .table_header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr 1fr 1fr;
+    align-items: center;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: $base-glass;
+    border: 1px solid $base-glass;
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    font-weight: bold;
+    gap: 1em;
+  }
+
+  .users_list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    overflow-y: auto;
+    height: 100%;
+    text-align: center;
+
+    scrollbar-width: thin;
+    scrollbar-color: $light-grey transparent;
+
+    .user {
+      display: grid;
+      grid-template-columns: 1fr 2fr 3fr 1fr 1fr;
+      align-items: center;
+      justify-items: center;
+      padding: 10px 20px;
+      background-color: $base-glass;
+      border: 1px solid $base-glass;
+      border-radius: 10px;
+      cursor: pointer;
+      gap: 1em;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: $base-glass-hover;
+      }
+
+      .avatar_container {
+        height: 3em;
+        .avatar {
+          height: 3em;
+        }
+      }
+
+      .exclude_button {
+        width: fit-content;
+      }
+    }
+  }
+}

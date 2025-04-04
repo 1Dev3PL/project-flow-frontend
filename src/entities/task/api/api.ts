@@ -1,7 +1,6 @@
 import { apiInstance } from "shared/api";
 import {
   Task,
-  TasksListData,
   TSortOptions,
   TUpdateTaskRequestData,
 } from "entities/task/api/types.ts";
@@ -10,7 +9,7 @@ export const getTasks = async (
   projectId: string,
   { page }: { page: number },
   sortOptions: TSortOptions | null,
-): Promise<TasksListData> => {
+): Promise<Task[]> => {
   return await apiInstance
     .get(
       `/tasks?projectId=${projectId}&page=${page}&sortOrder=${sortOptions ? sortOptions[0] : ""}&sortBy=${sortOptions ? sortOptions[1] : ""}`,

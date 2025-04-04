@@ -10,7 +10,14 @@
     width: 100%;
   }
 
-  .card {
+  .add_project_card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    color: $light-grey;
+    gap: 0.5em;
+    cursor: pointer;
     border-radius: 20px;
     background-color: $base-glass;
     backdrop-filter: blur(15px);
@@ -21,34 +28,6 @@
     &:hover {
       background-color: $base-glass-hover;
     }
-  }
-
-  .project_card {
-    padding: 2em;
-    box-sizing: border-box;
-
-    .title {
-      color: $base-white;
-      text-decoration: none;
-      font-size: 2em;
-      font-weight: 700;
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: inline-block;
-      width: 100%;
-    }
-  }
-
-  .add_project_card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2em;
-    color: $base-grey;
-    gap: 0.5em;
-    cursor: pointer;
 
     .icon {
       height: 1.5em;

@@ -5,6 +5,7 @@ import { AppLayout } from "app/layout";
 import { ProjectsPage } from "pages/projects";
 import { TasksPage } from "pages/tasks";
 import { DashboardPage } from "pages/dashboard";
+import { UsersPage } from "pages/users";
 
 export const router = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "users",
-            element: <></>,
+            element: <UsersPage />,
           },
         ],
       },

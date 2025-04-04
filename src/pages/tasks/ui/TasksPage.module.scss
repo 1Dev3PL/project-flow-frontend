@@ -42,7 +42,7 @@
     text-align: center;
 
     scrollbar-width: thin;
-    scrollbar-color: $base-grey transparent;
+    scrollbar-color: $light-grey transparent;
 
     .task {
       display: grid;
@@ -51,7 +51,6 @@
       text-align: center;
       padding: 10px 20px;
       background-color: $base-glass;
-      backdrop-filter: blur(8px);
       border: 1px solid $base-glass;
       border-radius: 10px;
       cursor: pointer;

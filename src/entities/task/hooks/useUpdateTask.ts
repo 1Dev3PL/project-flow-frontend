@@ -12,7 +12,9 @@ type TUpdateTaskData = {
 
 export const useUpdateTask = () => {
   const queryClient = useQueryClient();
-  const currentProjectId = useCurrentProjectStore((state) => state.currentProjectId)
+  const currentProjectId = useCurrentProjectStore(
+    (state) => state.currentProjectId,
+  );
 
   const { mutate: updateTaskMutation, isPending } = useMutation<
     Task,
@@ -38,9 +40,11 @@ export const useUpdateTask = () => {
 
       return { previousTask };
     },
-    onSuccess: (task) => {
-      queryClient.invalidateQueries({ queryKey: ["task", task.id] });
+    onSettled: (_, __, { taskId }) => {
+      queryClient.invalidateQueries({ queryKey: ["task", taskId] });
       queryClient.invalidateQueries({ queryKey: ["tasks", currentProjectId] });
+    },
+    onSuccess: () => {
       toast.success(`Изменения сохранены`);
     },
     onError: (_, __, context) => {

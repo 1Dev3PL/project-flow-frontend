@@ -1,37 +1,37 @@
 import style from "./ProjectsPage.module.scss";
-import { Link } from "react-router";
 import { Page, PageTitle } from "shared/ui";
 import addBigIcon from "shared/assets/icons/addBig.svg";
 import { useState } from "react";
-import { CreateProjectModal } from "features/createProjectModal";
+import { CreateProjectModal } from "features/createProject";
 import { useProjects } from "entities/project";
-import { useAuth } from "entities/user";
 import { CircularProgress } from "@mui/material";
-import classNames from "classnames";
+import { DeleteProjectModal } from "features/deleteProject";
+import { ProjectCard } from "pages/projects/ui/ProjectCard.tsx";
+import { EditProjectModal } from "features/editProject";
 
 export const ProjectsPage = () => {
-  const [open, setOpen] = useState(false);
-  const user = useAuth();
-  const { projects, isFetching } = useProjects(user.id);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [deletingProjectId, setDeletingProjectId] = useState<string | null>(
+    null,
+  );
+  const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
+  const { projects, isFetching } = useProjects();
 
   const renderProjects = () => {
     return (
       <>
         {projects?.map((project) => (
-          <Link to={`${project.id}/tasks`} key={project.id}>
-            <div
-              className={classNames(style.card, style.project_card)}
-              key={project.id}
-            >
-              <p className={style.title} title={project.title}>
-                {project.title}
-              </p>
-            </div>
-          </Link>
+          <ProjectCard
+            key={project.id}
+            id={project.id}
+            title={project.title}
+            onDeleteClick={() => setDeletingProjectId(project.id)}
+            onEditClick={() => setEditingProjectId(project.id)}
+          />
         ))}
         <div
-          className={classNames(style.card, style.add_project_card)}
-          onClick={() => setOpen(true)}
+          className={style.add_project_card}
+          onClick={() => setIsCreateModalOpen(true)}
         >
           <img src={addBigIcon} className={style.icon} alt={""} />
           <span>Создать проект</span>
@@ -52,7 +52,20 @@ export const ProjectsPage = () => {
           renderProjects()
         )}
       </div>
-      <CreateProjectModal open={open} handleClose={() => setOpen(false)} />
+      <CreateProjectModal
+        open={isCreateModalOpen}
+        handleClose={() => setIsCreateModalOpen(false)}
+      />
+      <DeleteProjectModal
+        open={!!deletingProjectId}
+        handleClose={() => setDeletingProjectId(null)}
+        projectId={deletingProjectId}
+      />
+      <EditProjectModal
+        open={!!editingProjectId}
+        handleClose={() => setEditingProjectId(null)}
+        projectId={editingProjectId}
+      />
     </Page>
   );
 };

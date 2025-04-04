@@ -48,14 +48,13 @@
 
   .options {
     position: absolute;
+    z-index: 10;
     list-style: none;
     width: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    z-index: 10;
-    background-color: rgb(70, 70, 70);
+    background-color: $base-grey;
     border-radius: 0 0 10px 10px;
-    backdrop-filter: blur(15px);
   }
 }

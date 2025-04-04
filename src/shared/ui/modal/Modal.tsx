@@ -8,12 +8,12 @@ const CustomDialog = styled(Dialog)(() => ({
     padding: 0,
   },
   "& .MuiDialog-paper": {
-    backgroundColor: "rgba(255, 255, 255, 0.10)",
-    backdropFilter: "blur(15px)",
+    backgroundColor: "rgba(50, 50, 50)",
     borderRadius: "30px",
     color: "rgba(255, 255, 255, 0.87)",
     padding: "2em",
     width: "1000px",
+    overflowY: "unset",
   },
 }));
 

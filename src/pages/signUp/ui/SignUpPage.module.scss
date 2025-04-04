@@ -8,7 +8,7 @@
 
   .signup_modal {
     display: flex;
-    background: rgba(255, 255, 255, 0.08);
+    background: $base-glass;
     backdrop-filter: blur(8px);
     border-radius: 40px;
     padding: 60px 70px;
@@ -49,7 +49,7 @@
       .have_account {
         display: flex;
         gap: 1em;
-        color: $base-grey;
+        color: $light-grey;
         margin-bottom: 2em;
 
         .link {
@@ -57,7 +57,7 @@
           font-weight: 600;
 
           &:visited {
-            color: $base-grey;
+            color: $light-grey;
           }
 
           &:hover {
@@ -74,8 +74,6 @@
         .password_section {
           display: flex;
           gap: 2em;
-
-
         }
       }
 

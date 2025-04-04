@@ -1,16 +1,16 @@
-import {
-  Page,
-  PageTitle,
-  TaskType,
-  TaskPriority,
-  Select,
-  TSelectOption,
-} from "shared/ui";
-import { AddTaskButton } from "features/addTaskButton";
+import { Page, PageTitle, Select, TSelectOption } from "shared/ui";
+import { AddTaskButton } from "features/addTask";
 import style from "./TasksPage.module.scss";
-import { ESortBy, ESortOrder, TSortOptions, useTasks } from "entities/task";
+import {
+  ESortBy,
+  ESortOrder,
+  TaskPriority,
+  TaskType,
+  TSortOptions,
+  useTasks,
+} from "entities/task";
 import { useInView } from "react-intersection-observer";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { TaskDetails } from "widgets/taskDetails";
 import { CircularProgress } from "@mui/material";
 import arrowDown from "shared/assets/icons/arrowDown.svg";
@@ -42,16 +42,16 @@ const sortOptions: TSelectOption<TSortOptions>[] = [
 
 export const TasksPage = () => {
   const projectId = useCurrentProjectStore((state) => state.currentProjectId);
-  const { ref, inView } = useInView();
   const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
   const [selectedSortOption, setSelectedSortOption] =
     useState<TSortOptions | null>(null);
   const { tasks, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
     useTasks(projectId, selectedSortOption);
-
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
-  }, [inView, fetchNextPage, hasNextPage, isFetchingNextPage]);
+  const { ref } = useInView({
+    onChange: (inView) => {
+      if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
+    },
+  });
 
   const handleOpen = (e: React.MouseEvent<HTMLDivElement>, taskId: string) => {
     e.stopPropagation();
@@ -76,8 +76,8 @@ export const TasksPage = () => {
               <div className={style.task_title} title={task.title}>
                 {task.title}
               </div>
-              {TaskType(task.type)}
-              {TaskPriority(task.priority)}
+              <TaskType type={task.type} />
+              <TaskPriority priority={task.priority} />
               <div>{task.executorId}</div>
               <div>{task.createdDate}</div>
             </div>
@@ -85,11 +85,9 @@ export const TasksPage = () => {
         ) : (
           <span className={style.no_task}>Нет задач</span>
         )}
-        {hasNextPage && (
-          <div ref={ref}>
-            {isFetchingNextPage && <CircularProgress color={"inherit"} />}
-          </div>
-        )}
+        <div ref={ref} style={{ minHeight: "1px" }}>
+          {isFetchingNextPage && <CircularProgress color={"inherit"} />}
+        </div>
       </>
     );
   };

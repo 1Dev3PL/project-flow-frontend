@@ -1,0 +1,22 @@
+@use "shared/styles/variables" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  .selector_container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    .selector_label {
+      color: $light-grey;
+    }
+  }
+
+  .button {
+    align-self: flex-end;
+    margin-top: 2em;
+  }
+}

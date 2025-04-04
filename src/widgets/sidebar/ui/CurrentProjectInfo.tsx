@@ -8,23 +8,23 @@ export const CurrentProjectInfo = () => {
   const currentProjectId = useCurrentProjectStore(
     (state) => state.currentProjectId,
   );
-  const { project, isLoading } = useProject(currentProjectId);
+  const { project, isFetching } = useProject(currentProjectId);
 
   return (
     <>
       {currentProjectId && (
         <Link className={style.container} to={`/projects/${currentProjectId}`}>
           <div className={style.image_container}>
-            {isLoading ? (
+            {isFetching ? (
               <Skeleton variant="circular" width={40} height={40} />
             ) : (
-              <img className={style.image} alt={""} />
+              <img alt={""} />
             )}
           </div>
           <div className={style.info}>
             <div className={style.label}>Проект</div>
             <div className={style.project_title} title={project?.title}>
-              {isLoading ? (
+              {isFetching ? (
                 <Skeleton variant="text" sx={{ fontSize: "1.5rem" }} />
               ) : (
                 project?.title

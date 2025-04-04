@@ -18,12 +18,12 @@ export const useTasks = (
       getTasks(projectId!, { page: meta.pageParam }, sortOptions),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _, lastPageParam) => {
-      if (lastPage.pagesCount > lastPageParam) {
-        return lastPageParam + 1;
+      if (lastPage.length === 0) {
+        return undefined
       }
-      return null;
+      return lastPageParam + 1
     },
-    select: (res) => res.pages.flatMap((page) => page.tasks),
+    select: (res) => res.pages.flat(),
     enabled: !!projectId
   });
 

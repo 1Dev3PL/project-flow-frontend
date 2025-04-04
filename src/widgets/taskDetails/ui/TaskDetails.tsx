@@ -1,14 +1,15 @@
-import { useTask, useUpdateTask } from "entities/task";
-import { Drawer, Input, Select } from "shared/ui";
-import style from "./taskDetails.module.scss";
 import {
   ETaskPriority,
   ETaskStatus,
   ETaskType,
-  taskPriorityOptions,
-  taskStatusOptions,
-  taskTypeOptions,
-} from "shared/constants";
+  taskPrioritySelectorOptions,
+  taskStatusSelectorOptions,
+  taskTypeSelectorOptions,
+  useTask,
+  useUpdateTask,
+} from "entities/task";
+import { Drawer, Input, Select, TextArea } from "shared/ui";
+import style from "./taskDetails.module.scss";
 import { useUser } from "entities/user";
 import { useEffect, useRef, useState } from "react";
 import { useProject } from "entities/project";
@@ -149,7 +150,7 @@ export const TaskDetails = (props: Props) => {
               <div className={style.details_row}>
                 <span className={style.row_title}>Тип</span>
                 <Select
-                  options={taskTypeOptions}
+                  options={taskTypeSelectorOptions}
                   selected={task?.type}
                   onChange={handleTypeChange}
                 />
@@ -157,7 +158,7 @@ export const TaskDetails = (props: Props) => {
               <div className={style.details_row}>
                 <span className={style.row_title}>Приоритет</span>
                 <Select
-                  options={taskPriorityOptions}
+                  options={taskPrioritySelectorOptions}
                   selected={task?.priority}
                   onChange={handlePriorityChange}
                 />
@@ -165,13 +166,14 @@ export const TaskDetails = (props: Props) => {
               <div className={style.details_row}>
                 <span className={style.row_title}>Статус</span>
                 <Select
-                  options={taskStatusOptions}
+                  options={taskStatusSelectorOptions}
                   selected={task?.status}
                   onChange={handleStatusChange}
                 />
               </div>
-              <Input
+              <TextArea
                 label={"Описание"}
+                placeholder={"Введите описание задачи"}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 onBlur={handleDescriptionUpdate}

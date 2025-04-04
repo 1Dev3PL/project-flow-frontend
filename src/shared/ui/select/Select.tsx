@@ -53,7 +53,9 @@ export const Select = <T,>(props: Props<T>) => {
 
   const handleOptionClick = (value: T) => {
     setIsOpen(false);
-    onChange?.(value);
+    if (value != selected) {
+      onChange?.(value);
+    }
   };
   const handleSelectorClick = () => {
     setIsOpen((prev) => !prev);

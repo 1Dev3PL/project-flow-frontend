@@ -5,7 +5,7 @@ import { CircularProgress } from "@mui/material";
 interface Props {
   className?: string;
   onClick?: () => void;
-  variant?: "outlined" | "contained" | "glass";
+  variant?: "outlined" | "contained" | "glass" | "danger";
   children?: string;
   type?: "submit" | "button";
   icon?: string;
@@ -29,20 +29,33 @@ export const Button = (props: Props) => {
         [style.button_outlined]: variant == "outlined",
         [style.button_contained]: variant == "contained",
         [style.button_glass]: variant == "glass",
+        [style.button_danger]: variant == "danger",
         [style.button_with_icon]: !!icon,
       })}
       onClick={onClick}
       type={type}
       disabled={loading}
     >
-      {loading ? (
-        <CircularProgress size={"1em"} color={"inherit"} />
-      ) : (
-        <>
-          {icon && <img className={style.icon} src={icon} alt={""} />}
-          <span>{children}</span>
-        </>
+      {loading && (
+        <div className={style.loader_container}>
+          <CircularProgress
+            size={"1em"}
+            color={"inherit"}
+            className={style.loader}
+          />
+        </div>
       )}
+      {icon && (
+        <img
+          className={style.icon}
+          style={{ visibility: loading ? "hidden" : "visible" }}
+          src={icon}
+          alt={""}
+        />
+      )}
+      <span style={{ visibility: loading ? "hidden" : "visible" }}>
+        {children}
+      </span>
     </button>
   );
 };

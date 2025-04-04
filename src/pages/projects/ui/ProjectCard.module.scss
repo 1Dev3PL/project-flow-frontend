@@ -1,0 +1,69 @@
+@use "shared/styles/variables" as *;
+
+.project_card {
+  padding: 2em;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  background-color: $base-glass;
+  backdrop-filter: blur(15px);
+  height: 200px;
+  width: 360px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: $base-glass-hover;
+  }
+
+  .card_header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+
+    .link {
+      overflow: hidden;
+
+      .title {
+        color: $base-white;
+        text-decoration: none;
+        font-size: 2em;
+        font-weight: 700;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        max-width: 100%;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .buttons_group {
+      display: flex;
+      gap: 1em;
+
+      .button {
+        display: flex;
+        align-items: center;
+        background: transparent;
+        clip-path: circle();
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+        padding: 0.8em;
+
+        &:hover {
+          background-color: $base-glass-hover;
+        }
+
+        .icon {
+          height: 1.5em;
+        }
+      }
+    }
+  }
+}

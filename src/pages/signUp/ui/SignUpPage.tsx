@@ -70,8 +70,8 @@ export const SignUpPage = () => {
               register={register("email", {
                 required: "Введите email",
                 pattern: {
-                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                  message: "Please enter a valid email",
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]{2,4}$/,
+                  message: "Введите валидную почту",
                 },
               })}
               error={errors.email?.message}

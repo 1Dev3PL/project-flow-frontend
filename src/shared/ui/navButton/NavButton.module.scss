@@ -1,7 +1,8 @@
 @use "shared/styles/variables" as *;
 
 .nav_button {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
   align-items: center;
   padding: 10px;
   gap: 1em;
@@ -12,6 +13,7 @@
 
   .icon {
     height: 1em;
+    justify-self: center;
   }
 
   &:hover {

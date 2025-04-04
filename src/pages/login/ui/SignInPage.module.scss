@@ -8,7 +8,7 @@
 
   .login_modal {
     display: flex;
-    background: rgba(255, 255, 255, 0.08);
+    background: $base-glass;
     backdrop-filter: blur(8px);
     border-radius: 40px;
     padding: 60px 70px;
@@ -47,7 +47,7 @@
       }
 
       .no_account {
-        color: $base-grey;
+        color: $light-grey;
         margin-bottom: 2em;
         display: flex;
         gap: 1em;
@@ -57,7 +57,7 @@
           font-weight: 600;
 
           &:visited {
-            color: $base-grey;
+            color: $light-grey;
           }
 
           &:hover {

@@ -5,7 +5,7 @@
   padding: 0 2em;
 
   .task_key {
-    color: $base-grey
+    color: $light-grey
   }
 
   .task_title {
@@ -23,7 +23,7 @@
       grid-template-columns: 1fr 2fr;
 
       .row_title {
-        color: $base-grey;
+        color: $light-grey;
         align-self: center;
       }
     }

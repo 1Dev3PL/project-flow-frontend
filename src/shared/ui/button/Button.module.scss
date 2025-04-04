@@ -6,9 +6,11 @@
   border: 3px solid;
   border-radius: 30px;
   padding: 8px 1em;
-  min-width: 200px;
+  width: fit-content;
+  min-width: 100px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
+  position: relative;
 
   &_outlined {
     color: $base-white;
@@ -17,12 +19,12 @@
 
     &:hover {
       background-color: $base-blue;
-      color: $base-dark-blue
+      color: $dark-blue
     }
   }
 
   &_contained {
-    color: $base-dark-blue;
+    color: $dark-blue;
     border-color: $base-blue;
     background-color: $base-blue;
   }
@@ -38,10 +40,31 @@
     }
   }
 
+  &_danger {
+    color: $base-danger;
+    border-color: $base-danger;
+    background: transparent;
+
+    &:hover {
+      color: $dark-blue;
+      background-color: $base-danger;
+    }
+  }
+
   &_with_icon {
     display: flex;
     align-items: center;
     gap: 1em;
+  }
+
+  .loader_container {
+    position: absolute;
+    left: 50%;
+
+    .loader {
+      position: relative;
+      left: -50%;
+    }
   }
 
   .icon {
