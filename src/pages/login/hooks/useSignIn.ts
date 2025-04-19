@@ -31,6 +31,8 @@ export const useSignIn = () => {
     onError: (error) => {
       if (error.response?.status === 400)
         toast.error("Неправильная почта или пароль");
+      else if (error.response?.status === 403)
+        toast.error("Аккаунт пользователя не подтвержден");
       else toast.error("Что-то пошло не так");
     },
   });

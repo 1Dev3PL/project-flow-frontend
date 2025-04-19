@@ -1,6 +1,6 @@
 @use 'shared/styles/variables' as *;
 
-.input_container {
+.wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11,24 +11,42 @@
     margin-bottom: 1em;
   }
 
-  .input {
-    font-family: OpenSans, sans-serif;
-    font-size: 1rem;
-    color: $base-white;
-    border: 2px solid $base-blue;
-    border-radius: 10px;
-    background: none;
-    padding: 8px 10px;
-    box-sizing: border-box;
-    outline: none;
+  .input_container {
+    position: relative;
     width: 100%;
 
-    &::placeholder {
-      color: $light-grey;
+    .input {
+      font-family: OpenSans, sans-serif;
+      font-size: 1rem;
+      color: $base-white;
+      border: 2px solid $base-blue;
+      border-radius: 10px;
+      background: none;
+      padding: 8px 10px;
+      box-sizing: border-box;
+      outline: none;
+      width: 100%;
+
+      &::placeholder {
+        color: $light-grey;
+      }
+
+      &:focus {
+        border-color: $base-white;
+      }
     }
 
-    &:focus {
-      border-color: $base-white;
+    .visibility_toggle {
+      position: absolute;
+      padding: 0 0.5em;
+      height: 100%;
+      right: 0;
+      top: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      border-radius: 10px;
     }
   }
 

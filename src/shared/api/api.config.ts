@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiInstance = axios.create({
-  baseURL: "/api",
+  baseURL: process.env.NODE_ENV == "test" ? "http://localhost:8081" : "/api",
   withCredentials: true,
 });
 

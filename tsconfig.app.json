@@ -15,6 +15,7 @@
       "entities/*": ["entities/*"],
       "shared/*": ["shared/*"]
     },
+    "types": ["vitest/globals"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",

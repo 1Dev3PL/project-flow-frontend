@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "../api/api.ts";
+import { addTask } from "../api/api.ts";
 import { TAddTaskRequestData } from "../api/types.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
@@ -13,7 +13,7 @@ export const useAddTask = () => {
     AxiosError,
     TAddTaskRequestData
   >({
-    mutationFn: (task: TAddTaskRequestData) => api(task),
+    mutationFn: (task: TAddTaskRequestData) => addTask(task),
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
     },

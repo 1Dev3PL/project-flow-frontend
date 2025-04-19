@@ -6,11 +6,16 @@ import { ProjectsPage } from "pages/projects";
 import { TasksPage } from "pages/tasks";
 import { DashboardPage } from "pages/dashboard";
 import { UsersPage } from "pages/users";
+import { ConfirmationPage } from "pages/confirmation";
 
 export const router = createBrowserRouter([
   {
     path: "signup",
     element: <SignUpPage />,
+  },
+  {
+    path: "confirmation",
+    element: <ConfirmationPage />,
   },
   {
     path: "login",
