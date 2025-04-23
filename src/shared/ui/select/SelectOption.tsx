@@ -1,16 +1,19 @@
 import { TSelectOption } from "shared/ui";
 import style from "./SelectOption.module.scss";
 import React, { useEffect, useRef } from "react";
+import classNames from "classnames";
 
 type Props<T> = {
   option: TSelectOption<T>;
   onClick: (value: T) => void;
+  className?: string;
 };
 
 export const SelectOption = <T,>(props: Props<T>) => {
   const {
     option: { title, value, icon },
     onClick,
+    className,
   } = props;
   const optionRef = useRef<HTMLLIElement>(null);
 
@@ -39,7 +42,7 @@ export const SelectOption = <T,>(props: Props<T>) => {
   return (
     <li
       ref={optionRef}
-      className={style.option}
+      className={classNames(style.option, className)}
       value={value as string}
       onClick={handleClick}
       tabIndex={0}

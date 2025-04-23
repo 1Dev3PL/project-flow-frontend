@@ -4,8 +4,8 @@ import { SignInData } from "pages/login/api/types.ts";
 import { signIn } from "pages/login/api/signIn.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { User } from "entities/user";
 import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
+import { User } from "shared/types";
 
 export const useSignIn = () => {
   const queryClient = useQueryClient();

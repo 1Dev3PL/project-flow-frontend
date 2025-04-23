@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import style from "./Select.module.scss";
-import arrowDown from "shared/assets/icons/arrowDown.svg";
 import { TSelectOption } from "shared/ui";
 import { SelectOption } from "shared/ui/select/SelectOption.tsx";
 import classNames from "classnames";
+import arrowDown from "shared/assets/icons/arrowDown.svg";
 
 type Props<T> = {
   selected?: T;

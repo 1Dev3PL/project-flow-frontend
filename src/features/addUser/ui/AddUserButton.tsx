@@ -25,15 +25,6 @@ export const AddUserButton = () => {
   const { addUserMutation, isPending } = useAddUser();
   const projectId = useCurrentProjectStore((state) => state.currentProjectId);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    reset();
-    setOpen(false);
-  };
-
   const handleRoleChange = (role: EUserRole) => {
     setSelectedRole(role);
   };
@@ -49,17 +40,26 @@ export const AddUserButton = () => {
       },
     };
 
-    addUserMutation(data, { onSettled: handleClose });
+    addUserMutation(data, {
+      onSettled: () => {
+        reset();
+        setOpen(false);
+      },
+    });
   };
 
   return (
     <>
-      <Button onClick={handleOpen} icon={addFilledIcon} variant={"glass"}>
+      <Button
+        onClick={() => setOpen(true)}
+        icon={addFilledIcon}
+        variant={"glass"}
+      >
         Добавить пользователя
       </Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         title={"Отправить приглашение в команду"}
       >
         <form

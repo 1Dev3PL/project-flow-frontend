@@ -3,7 +3,7 @@ import typeTaskIcon from "shared/assets/icons/taskTypeIcons/typeTask.svg";
 import typeBugIcon from "shared/assets/icons/taskTypeIcons/typeBug.svg";
 import typeStoryIcon from "shared/assets/icons/taskTypeIcons/typeStory.svg";
 import typeEpicIcon from "shared/assets/icons/taskTypeIcons/typeEpic.svg";
-import { ETaskType } from "entities/task";
+import { ETaskType } from "shared/types";
 
 export const taskTypeSelectorOptions: TSelectOption<ETaskType>[] = [
   { title: "Задача", value: ETaskType.TASK, icon: typeTaskIcon },

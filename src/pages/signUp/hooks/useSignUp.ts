@@ -3,7 +3,7 @@ import { signUp } from "pages/signUp/api/signUp.ts";
 import { SignUpData } from "pages/signUp/api/types.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { User } from "entities/user";
+import { User } from "shared/types";
 
 export const useSignUp = () => {
   const queryClient = useQueryClient();

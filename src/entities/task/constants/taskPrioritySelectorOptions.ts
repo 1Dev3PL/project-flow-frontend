@@ -3,7 +3,7 @@ import priorityCriticalIcon from "shared/assets/icons/taskPriorityIcons/priority
 import priorityHighIcon from "shared/assets/icons/taskPriorityIcons/priorityHigh.svg";
 import priorityMediumIcon from "shared/assets/icons/taskPriorityIcons/priorityMedium.svg";
 import priorityLowIcon from "shared/assets/icons/taskPriorityIcons/priorityLow.svg";
-import { ETaskPriority } from "entities/task";
+import { ETaskPriority } from "shared/types";
 
 export const taskPrioritySelectorOptions: TSelectOption<ETaskPriority>[] = [
   {

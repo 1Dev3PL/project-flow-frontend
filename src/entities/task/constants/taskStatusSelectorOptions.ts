@@ -1,5 +1,5 @@
 import { TSelectOption } from "shared/ui";
-import { ETaskStatus } from "entities/task";
+import { ETaskStatus } from "shared/types";
 
 export const taskStatusSelectorOptions: TSelectOption<ETaskStatus>[] = [
   {

@@ -1,9 +1,9 @@
-import { ETaskPriority } from "entities/task";
 import priorityMediumIcon from "shared/assets/icons/taskPriorityIcons/priorityMedium.svg";
 import priorityLowIcon from "shared/assets/icons/taskPriorityIcons/priorityLow.svg";
 import priorityHighIcon from "shared/assets/icons/taskPriorityIcons/priorityHigh.svg";
 import priorityCriticalIcon from "shared/assets/icons/taskPriorityIcons/priorityCritical.svg";
 import style from "./TaskPriority.module.scss";
+import { ETaskPriority } from "shared/types";
 
 export const TaskPriority = ({ priority }: { priority: ETaskPriority }) => {
   const taskPriority = {

@@ -16,6 +16,7 @@ import { CircularProgress } from "@mui/material";
 import arrowDown from "shared/assets/icons/arrowDown.svg";
 import arrowUp from "shared/assets/icons/arrowUp.svg";
 import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
+import userIcon from "shared/assets/icons/avatar.svg";
 
 const sortOptions: TSelectOption<TSortOptions>[] = [
   { title: "Название", value: [ESortOrder.ASC, ESortBy.TITLE], icon: arrowUp },
@@ -78,7 +79,16 @@ export const TasksPage = () => {
               </div>
               <TaskType type={task.type} />
               <TaskPriority priority={task.priority} />
-              <div>{task.executorId}</div>
+              <div className={style.author_block}>
+                {task.executor && (
+                  <img
+                    className={style.author_avatar}
+                    src={userIcon}
+                    alt={""}
+                  />
+                )}
+                {task.executor?.name}
+              </div>
               <div>{task.createdDate}</div>
             </div>
           ))

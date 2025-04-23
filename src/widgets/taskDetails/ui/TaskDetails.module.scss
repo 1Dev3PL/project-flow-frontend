@@ -25,6 +25,18 @@
       .row_title {
         color: $light-grey;
         align-self: center;
+        padding: 8px 10px;
+      }
+
+      .author_block {
+        display: flex;
+        align-items: center;
+        gap: 0.8em;
+        padding: 8px 10px;
+
+        .author_avatar {
+          height: 1.5em;
+        }
       }
     }
   }

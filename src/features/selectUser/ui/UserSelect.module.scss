@@ -1,0 +1,71 @@
+@use "shared/styles/variables" as *;
+
+.selector_container {
+  position: relative;
+
+  .selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    padding: 8px 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 100%;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: $base-glass-hover;
+    }
+
+    &_open {
+      background-color: $base-glass-hover;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .selected_option {
+      display: flex;
+      align-items: center;
+      gap: 0.8em;
+      height: 1.5em;
+
+      .icon {
+        height: 1.5em;
+        max-width: 1.5em;
+      }
+    }
+
+    .arrow {
+      transition: transform 0.2s ease-in-out;
+      pointer-events: none;
+
+      &_open {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .options {
+    position: absolute;
+    z-index: 10;
+    list-style: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: $base-grey;
+    border-radius: 0 0 10px 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 140px;
+    scrollbar-width: thin;
+    scrollbar-color: $light-grey transparent;
+
+    .loader {
+      display: flex;
+      justify-content: center;
+      padding: 0.5em 0;
+    }
+  }
+}

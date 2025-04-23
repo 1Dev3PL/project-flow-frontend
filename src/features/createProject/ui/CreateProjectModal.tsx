@@ -24,11 +24,6 @@ export const CreateProjectModal = (props: Props) => {
   } = useForm<TForm>({ mode: "onSubmit", reValidateMode: "onSubmit" });
   const { createProjectMutation, isPending } = useCreateProject();
 
-  const handleModalClose = () => {
-    reset();
-    handleClose();
-  };
-
   const handleCreateProject: SubmitHandler<TForm> = (formData, event) => {
     event?.preventDefault();
 
@@ -38,13 +33,18 @@ export const CreateProjectModal = (props: Props) => {
       key: formData.key,
     };
 
-    createProjectMutation(data, { onSettled: handleModalClose });
+    createProjectMutation(data, {
+      onSettled: () => {
+        reset();
+        handleClose();
+      },
+    });
   };
 
   return (
     <Modal
       open={open}
-      onClose={handleModalClose}
+      onClose={handleClose}
       title={"Создать новый проект"}
     >
       <form className={style.form} onSubmit={handleSubmit(handleCreateProject)}>

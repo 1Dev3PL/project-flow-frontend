@@ -1,6 +1,6 @@
-import { Project } from "entities/project/api/types.ts";
 import { apiInstance } from "shared/api";
 import { TCreateProjectRequestData } from "./types.ts";
+import { Project } from "shared/types";
 
 export const createProject = async (
   projectData: TCreateProjectRequestData,

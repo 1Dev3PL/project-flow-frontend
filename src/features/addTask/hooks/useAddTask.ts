@@ -3,7 +3,7 @@ import { addTask } from "../api/api.ts";
 import { TAddTaskRequestData } from "../api/types.ts";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
-import { Task } from "entities/task";
+import { Task } from "shared/types";
 
 export const useAddTask = () => {
   const queryClient = useQueryClient();

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getTask } from "entities/task/api/api.ts";
-import { Task } from "entities/task";
+import { Task } from "shared/types";
 
 export const useTask = (taskId: string | null) => {
   const { data: task, isLoading } = useQuery<Task>({

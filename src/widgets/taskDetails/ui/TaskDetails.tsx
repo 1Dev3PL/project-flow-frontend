@@ -1,7 +1,4 @@
 import {
-  ETaskPriority,
-  ETaskStatus,
-  ETaskType,
   taskPrioritySelectorOptions,
   taskStatusSelectorOptions,
   taskTypeSelectorOptions,
@@ -10,9 +7,10 @@ import {
 } from "entities/task";
 import { Drawer, Input, Select, TextArea } from "shared/ui";
 import style from "./taskDetails.module.scss";
-import { useUser } from "entities/user";
 import { useEffect, useRef, useState } from "react";
-import { useProject } from "entities/project";
+import { ETaskPriority, ETaskStatus, ETaskType, User } from "shared/types";
+import { UserSelect } from "features/selectUser";
+import userIcon from "shared/assets/icons/avatar.svg";
 
 interface Props {
   taskId: string | null;
@@ -23,8 +21,6 @@ interface Props {
 export const TaskDetails = (props: Props) => {
   const { taskId, open, handleClose } = props;
   const { task, isLoading } = useTask(taskId);
-  const { user: author } = useUser(task?.authorId);
-  const { project } = useProject(task?.projectId);
   const { updateTaskMutation } = useUpdateTask();
 
   const [title, setTitle] = useState("");
@@ -69,6 +65,14 @@ export const TaskDetails = (props: Props) => {
     updateTaskMutation({
       taskId: task!.id,
       description,
+    });
+  };
+
+  const handleExecutorChange = (executor: User | null) => {
+    updateTaskMutation({
+      taskId: task!.id,
+      executor: executor,
+      executorId: executor?.id || "",
     });
   };
 
@@ -141,11 +145,25 @@ export const TaskDetails = (props: Props) => {
             <div className={style.task_details}>
               <div className={style.details_row}>
                 <span className={style.row_title}>Проект</span>
-                {project?.title}
+                {task?.project.title}
               </div>
               <div className={style.details_row}>
                 <span className={style.row_title}>Автор</span>
-                {author?.name}
+                <div className={style.author_block}>
+                  <img
+                    className={style.author_avatar}
+                    src={userIcon}
+                    alt={""}
+                  />
+                  {task?.author.name}
+                </div>
+              </div>
+              <div className={style.details_row}>
+                <span className={style.row_title}>Исполнитель</span>
+                <UserSelect
+                  selected={task?.executor}
+                  onChange={handleExecutorChange}
+                />
               </div>
               <div className={style.details_row}>
                 <span className={style.row_title}>Тип</span>

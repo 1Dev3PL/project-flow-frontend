@@ -1,13 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateTask } from "entities/task/api/api.ts";
 import { AxiosError } from "axios";
-import { Task } from "entities/task";
 import toast from "react-hot-toast";
 import { TUpdateTaskRequestData } from "entities/task/api/types.ts";
+import { Task, User } from "shared/types";
 import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
 
 type TUpdateTaskData = {
   taskId: string;
+  executor?: User | null;
 } & TUpdateTaskRequestData;
 
 export const useUpdateTask = () => {
@@ -22,8 +23,9 @@ export const useUpdateTask = () => {
     TUpdateTaskData,
     { previousTask?: Task }
   >({
-    mutationFn: ({ taskId, ...taskData }) => updateTask(taskId, taskData),
-    onMutate: async ({ taskId, ...taskData }) => {
+    mutationFn: ({ taskId, executor, ...taskData }) =>
+      updateTask(taskId, taskData),
+    onMutate: async ({ taskId, executorId, ...taskData }) => {
       await queryClient.cancelQueries({
         queryKey: ["task", taskId],
       });

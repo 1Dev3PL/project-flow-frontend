@@ -10,11 +10,12 @@ import {
   taskTypeSelectorOptions,
 } from "entities/task";
 import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
+import { UserSelect } from "features/selectUser";
+import { User } from "shared/types";
 
 type TForm = {
   title: string;
   description: string;
-  executorId: string;
 };
 
 export const AddTaskButton = () => {
@@ -31,20 +32,10 @@ export const AddTaskButton = () => {
   const [selectedTaskPriority, setSelectedTaskPriority] = useState(
     taskPrioritySelectorOptions[2].value,
   );
+  const [selectedExecutor, setSelectedExecutor] = useState<User | null>(null);
   const user = useAuth();
   const projectId = useCurrentProjectStore((state) => state.currentProjectId);
   const { addTaskMutation, isPending } = useAddTask();
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    reset();
-    setSelectedTaskType(taskTypeSelectorOptions[0].value);
-    setSelectedTaskPriority(taskPrioritySelectorOptions[2].value);
-    setOpen(false);
-  };
 
   const handleAddTask: SubmitHandler<TForm> = (formData, event) => {
     event?.preventDefault();
@@ -56,18 +47,26 @@ export const AddTaskButton = () => {
       description: formData.description,
       type: selectedTaskType,
       priority: selectedTaskPriority,
-      executorId: formData.executorId,
+      executorId: selectedExecutor?.id,
     };
 
-    addTaskMutation(data, { onSettled: handleClose });
+    addTaskMutation(data, {
+      onSettled: () => {
+        reset();
+        setSelectedTaskType(taskTypeSelectorOptions[0].value);
+        setSelectedTaskPriority(taskPrioritySelectorOptions[2].value);
+        setSelectedExecutor(null);
+        setOpen(false);
+      },
+    });
   };
 
   return (
     <>
-      <Button variant={"glass"} onClick={handleOpen} icon={addFilledIcon}>
+      <Button variant={"glass"} onClick={() => setOpen(true)} icon={addFilledIcon}>
         Добавить задачу
       </Button>
-      <Modal open={open} onClose={handleClose} title={"Новая задача"}>
+      <Modal open={open} onClose={() => setOpen(false)} title={"Новая задача"}>
         <form className={style.form} onSubmit={handleSubmit(handleAddTask)}>
           <Input
             register={register("title", { required: "Введите название" })}
@@ -95,6 +94,13 @@ export const AddTaskButton = () => {
                 options={taskPrioritySelectorOptions}
                 selected={selectedTaskPriority}
                 onChange={setSelectedTaskPriority}
+              />
+            </div>
+            <div className={style.selector_container}>
+              <span className={style.selector_label}>Исполнитель:</span>
+              <UserSelect
+                selected={selectedExecutor}
+                onChange={setSelectedExecutor}
               />
             </div>
           </div>

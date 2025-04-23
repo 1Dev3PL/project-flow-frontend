@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Project } from "entities/project";
 import { getProject } from "entities/project/api/api.ts";
+import { Project } from "shared/types";
 
 export const useProject = (projectId?: string | null) => {
   const { data: project, isFetching } = useQuery<Project>({

@@ -1,8 +1,4 @@
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import { User } from "shared/types";
 
 export enum EUserRole {
   ADMIN = "ADMIN",

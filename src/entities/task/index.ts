@@ -1,8 +1,4 @@
 export {
-  ETaskType,
-  ETaskPriority,
-  ETaskStatus,
-  type Task,
   type TSortOptions,
   ESortOrder,
   ESortBy,

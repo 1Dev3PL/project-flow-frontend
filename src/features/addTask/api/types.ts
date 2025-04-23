@@ -1,4 +1,4 @@
-import { ETaskPriority, ETaskType } from "entities/task";
+import { ETaskPriority, ETaskType } from "shared/types";
 
 export type TAddTaskRequestData = {
   projectId: string;

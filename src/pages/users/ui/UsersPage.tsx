@@ -8,7 +8,7 @@ import {
   useRole,
   userRoleNames,
   userRoleSelectorOptions,
-  useUsers,
+  useProjectUsers,
 } from "entities/user";
 import avatar from "shared/assets/icons/avatar.svg";
 import { AddUserButton } from "features/addUser";
@@ -20,8 +20,8 @@ export const UsersPage = () => {
   const authData = useAuth();
   const projectId = useCurrentProjectStore((state) => state.currentProjectId)!;
   const { role } = useRole(projectId);
-  const { users, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
-    useUsers(projectId);
+  const { projectUsers, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useProjectUsers(projectId);
   const { ref } = useInView({
     onChange: (inView) => {
       if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
@@ -36,7 +36,7 @@ export const UsersPage = () => {
   const renderUsers = () => {
     return (
       <>
-        {users?.map((user) => (
+        {projectUsers?.map((user) => (
           <div className={style.user} key={user.id}>
             <div className={style.avatar_container}>
               <img className={style.avatar} src={avatar} alt={""} />

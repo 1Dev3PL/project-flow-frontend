@@ -1,16 +1,16 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getUsers } from "entities/user/api/api.ts";
+import { getProjectUsers } from "entities/user/api/api.ts";
 
-export const useUsers = (projectId: string | null) => {
+export const useProjectUsers = (projectId: string | null) => {
   const {
-    data: users,
+    data: projectUsers,
     isLoading,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["users", projectId],
-    queryFn: (meta) => getUsers(projectId!, { page: meta.pageParam }),
+    queryKey: ["project-users", projectId],
+    queryFn: (meta) => getProjectUsers(projectId!, { page: meta.pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _, lastPageParam) => {
       if (lastPage.length === 0) {
@@ -23,7 +23,7 @@ export const useUsers = (projectId: string | null) => {
   });
 
   return {
-    users,
+    projectUsers,
     isLoading,
     fetchNextPage,
     isFetchingNextPage,

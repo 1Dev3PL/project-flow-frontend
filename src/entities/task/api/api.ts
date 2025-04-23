@@ -1,9 +1,9 @@
 import { apiInstance } from "shared/api";
 import {
-  Task,
   TSortOptions,
   TUpdateTaskRequestData,
 } from "entities/task/api/types.ts";
+import { Task } from "shared/types";
 
 export const getTasks = async (
   projectId: string,

@@ -1,10 +1,10 @@
-import { ETaskType } from "entities/task";
 import typeTaskIcon from "shared/assets/icons/taskTypeIcons/typeTask.svg";
 import typeEpicIcon from "shared/assets/icons/taskTypeIcons/typeEpic.svg";
 import typeBugIcon from "shared/assets/icons/taskTypeIcons/typeBug.svg";
 import typeStoryIcon from "shared/assets/icons/taskTypeIcons/typeStory.svg";
 import typeSubtaskIcon from "shared/assets/icons/taskTypeIcons/typeSubtask.svg";
 import style from "./TaskType.module.scss";
+import { ETaskType } from "shared/types";
 
 export const TaskType = ({ type }: { type: ETaskType }) => {
   const taskType = {
