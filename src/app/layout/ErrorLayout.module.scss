@@ -1,0 +1,17 @@
+.error_layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 2em;
+
+  .header {
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  .error_message {
+    font-size: 2rem;
+    margin: 0;
+    padding-left: 1em;
+  }
+}

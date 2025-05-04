@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { deleteProject } from "features/deleteProject/api/api.ts";
 import toast from "react-hot-toast";
-import { Project } from "entities/project";
+import { Project } from "shared/types";
 
 type TDeleteProjectData = {
   projectId: string;

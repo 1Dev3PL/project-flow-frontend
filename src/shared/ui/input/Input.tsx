@@ -1,12 +1,6 @@
 import classNames from "classnames";
 import style from "./Input.module.scss";
-import React, {
-  ChangeEvent,
-  ReactElement,
-  Ref,
-  useId,
-  useState,
-} from "react";
+import React, { ChangeEvent, ReactElement, Ref, useId, useState } from "react";
 import { FieldValues, UseFormRegister } from "react-hook-form";
 import eyeIcon from "shared/assets/icons/eye.svg";
 import eyeOffIcon from "shared/assets/icons/eyeOff.svg";
@@ -59,7 +53,9 @@ const InputWithRef = <T extends FieldValues>(
         <input
           ref={ref}
           type={inputType}
-          className={style.input}
+          className={classNames(style.input, {
+            [style.input_error]: error,
+          })}
           placeholder={placeholder}
           value={value}
           onChange={onChange}
@@ -70,11 +66,13 @@ const InputWithRef = <T extends FieldValues>(
         />
         {type === "password" && (
           <span className={style.visibility_toggle} onClick={toggleVisibility}>
-          <img src={visibilityIcon} alt={""} />
-        </span>
+            <img src={visibilityIcon} alt={""} />
+          </span>
         )}
       </div>
-      {error && <p className={style.validation_message}>{error}</p>}
+      <div className={style.validation_wrapper}>
+        {error && <p className={style.validation_message}>{error}</p>}
+      </div>
     </div>
   );
 };

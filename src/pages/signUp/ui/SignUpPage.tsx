@@ -106,7 +106,7 @@ export const SignUpPage = () => {
               />
             </div>
             <div className={style.button_container}>
-              <Button type={"submit"} variant={"outlined"} loading={isPending}>
+              <Button type={"submit"} loading={isPending}>
                 Зарегистрироваться
               </Button>
             </div>

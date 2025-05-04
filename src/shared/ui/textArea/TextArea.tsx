@@ -39,7 +39,9 @@ const TextAreaWithRef = <T extends FieldValues>(
       )}
       <textarea
         ref={ref}
-        className={style.textarea}
+        className={classNames(style.textarea, {
+          [style.textarea_error]: error,
+        })}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
@@ -48,12 +50,16 @@ const TextAreaWithRef = <T extends FieldValues>(
         aria-invalid={error ? "true" : "false"}
         {...register}
       />
-      {error && <p className={style.validation_message}>{error}</p>}
+      <div className={style.validation_wrapper}>
+        {error && <p className={style.validation_message}>{error}</p>}
+      </div>
     </div>
   );
 };
 
-export const TextArea = React.forwardRef(TextAreaWithRef) as <T extends FieldValues>(
+export const TextArea = React.forwardRef(TextAreaWithRef) as <
+  T extends FieldValues,
+>(
   props: Props<T> & {
     ref?: Ref<HTMLInputElement>;
   },

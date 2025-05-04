@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
 import { Portal } from "shared/ui";
 import style from "./Drawer.module.scss";
-import closeIcon from "shared/assets/icons/close.svg";
 
 interface Props {
   id: string;
@@ -49,11 +48,6 @@ export const Drawer = (props: Props) => {
   return open ? (
     <Portal id={id}>
       <div className={style.drawer} ref={rootRef}>
-        <div className={style.header}>
-          <button className={style.close_button} onClick={onClose}>
-            <img className={style.close_icon} src={closeIcon} alt={"close"} />
-          </button>
-        </div>
         {children}
       </div>
     </Portal>

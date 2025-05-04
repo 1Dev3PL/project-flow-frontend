@@ -14,8 +14,8 @@ export const useAddTask = () => {
     TAddTaskRequestData
   >({
     mutationFn: (task: TAddTaskRequestData) => addTask(task),
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+    onSettled: (_, __, { projectId }) => {
+      queryClient.invalidateQueries({ queryKey: ["tasks", projectId] });
     },
     onSuccess: (data) => {
       toast.success(`Задача ${data.title} добавлена`);

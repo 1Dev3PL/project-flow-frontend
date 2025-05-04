@@ -1,0 +1,16 @@
+@use "shared/styles/variables" as *;
+
+.loader {
+  text-align: center;
+}
+
+.dashboard {
+  display: inline-grid;
+  grid-auto-flow: column;
+  gap: 0.5em;
+  box-sizing: border-box;
+  height: 100%;
+  padding-bottom: 1em;
+  overflow-x: auto;
+  scrollbar-color: $light-grey transparent;
+}

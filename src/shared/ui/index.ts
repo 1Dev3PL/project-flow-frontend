@@ -1,5 +1,6 @@
 export { Button } from "./button/Button.tsx";
 export { Drawer } from "./drawer/Drawer.tsx";
+export { IconButton } from "./iconButton/IconButton.tsx";
 export { Input } from "./input/Input.tsx";
 export { Modal } from "./modal/Modal.tsx";
 export { NavButton } from "./navButton/NavButton.tsx";

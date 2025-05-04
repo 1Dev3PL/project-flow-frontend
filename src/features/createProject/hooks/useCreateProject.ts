@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { Project } from "entities/project";
 import { AxiosError } from "axios";
 import { createProject } from "../api/api.ts";
 import { TCreateProjectRequestData } from "features/createProject/api/types.ts";
+import { Project } from "shared/types";
 
 export const useCreateProject = () => {
   const queryClient = useQueryClient();

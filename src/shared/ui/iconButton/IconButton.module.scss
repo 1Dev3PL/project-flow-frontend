@@ -1,0 +1,21 @@
+@use "shared/styles/variables" as *;
+
+.icon_button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  clip-path: circle();
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  padding: 0.8em;
+  height: 3rem;
+
+  &:hover {
+    background-color: $base-glass-hover;
+  }
+
+  .icon {
+    height: 100%;
+  }
+}

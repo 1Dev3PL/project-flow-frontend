@@ -6,6 +6,7 @@ export const useAuth = () => {
   const { data: user } = useSuspenseQuery<User>({
     queryKey: ["auth"],
     queryFn: getAuthData,
+    refetchOnMount: false,
   });
 
   return user;

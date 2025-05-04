@@ -79,7 +79,7 @@ export const SignInPage = () => {
               error={errors.password?.message}
             />
             <div className={style.button_container}>
-              <Button type={"submit"} variant={"outlined"} loading={isPending}>
+              <Button type={"submit"} loading={isPending}>
                 Войти
               </Button>
             </div>

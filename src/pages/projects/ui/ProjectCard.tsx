@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import deleteIcon from "shared/assets/icons/delete.svg";
 import editIcon from "shared/assets/icons/edit.svg";
 import { EUserRole, useRole } from "entities/user";
+import { IconButton } from "shared/ui";
 
 interface Props {
   id: string;
@@ -25,20 +26,12 @@ export const ProjectCard = (props: Props) => {
         </Link>
         {role == EUserRole.ADMIN && (
           <div className={style.buttons_group}>
-            <button className={style.button} onClick={onEditClick}>
-              <img
-                className={style.icon}
-                src={editIcon}
-                alt={"edit"}
-              />
-            </button>
-            <button className={style.button} onClick={onDeleteClick}>
-              <img
-                className={style.icon}
-                src={deleteIcon}
-                alt={"delete"}
-              />
-            </button>
+            <IconButton icon={editIcon} alt={"edit"} onClick={onEditClick} />
+            <IconButton
+              icon={deleteIcon}
+              alt={"delete"}
+              onClick={onDeleteClick}
+            />
           </div>
         )}
       </div>

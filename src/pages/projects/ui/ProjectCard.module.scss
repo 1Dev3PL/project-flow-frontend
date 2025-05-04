@@ -45,25 +45,6 @@
     .buttons_group {
       display: flex;
       gap: 1em;
-
-      .button {
-        display: flex;
-        align-items: center;
-        background: transparent;
-        clip-path: circle();
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
-        padding: 0.8em;
-
-        &:hover {
-          background-color: $base-glass-hover;
-        }
-
-        .icon {
-          height: 1.5em;
-        }
-      }
     }
   }
 }

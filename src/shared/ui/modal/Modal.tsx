@@ -1,6 +1,6 @@
 import { Dialog, styled } from "@mui/material";
 import style from "./Modal.module.scss";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import closeIcon from "shared/assets/icons/close.svg";
 
 const CustomDialog = styled(Dialog)(() => ({
@@ -22,14 +22,19 @@ interface Props {
   onClose: () => void;
   title?: string;
   children: ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export const Modal = (props: Props) => {
-  const { open, onClose, title, children } = props;
+  const { open, onClose, title, children, onClick } = props;
 
   return (
     <>
-      <CustomDialog open={open} onClose={onClose}>
+      <CustomDialog
+        open={open}
+        onClose={onClose}
+        onClick={onClick}
+      >
         <div className={style.modal_header}>
           {title && <h2 className={style.title}>{title}</h2>}
           <button className={style.close_button} onClick={onClose}>

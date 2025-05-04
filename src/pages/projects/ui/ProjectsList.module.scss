@@ -1,14 +1,14 @@
 @use "shared/styles/variables" as *;
 
-.content {
+.loader {
+  display: flex;
+  justify-content: center;
+}
+
+.projects_list {
   display: flex;
   flex-flow: wrap;
   gap: 2em;
-
-  .loader {
-    text-align: center;
-    width: 100%;
-  }
 
   .add_project_card {
     display: flex;

@@ -7,51 +7,62 @@ import { TasksPage } from "pages/tasks";
 import { DashboardPage } from "pages/dashboard";
 import { UsersPage } from "pages/users";
 import { ConfirmationPage } from "pages/confirmation";
+import { ErrorBoundaryLayout } from "app/layout/ErrorBoundaryLayout.tsx";
+import { NotFoundPage } from "pages/notFound";
 
 export const router = createBrowserRouter([
   {
-    path: "signup",
-    element: <SignUpPage />,
-  },
-  {
-    path: "confirmation",
-    element: <ConfirmationPage />,
-  },
-  {
-    path: "login",
-    element: <SignInPage />,
-  },
-  {
-    element: <AppLayout />,
+    element: <ErrorBoundaryLayout />,
     children: [
       {
-        path: "/",
-        element: <></>,
+        path: "signup",
+        element: <SignUpPage />,
       },
       {
-        path: "/projects",
-        element: <ProjectsPage />,
+        path: "confirmation",
+        element: <ConfirmationPage />,
       },
       {
-        path: "/projects/:projectId",
+        path: "login",
+        element: <SignInPage />,
+      },
+      {
+        element: <AppLayout />,
         children: [
           {
-            path: "tasks",
-            element: <TasksPage />,
+            path: "/",
+            element: <></>,
           },
           {
-            path: "dashboard",
-            element: <DashboardPage />,
+            path: "/projects",
+            element: <ProjectsPage />,
           },
           {
-            path: "users",
-            element: <UsersPage />,
+            path: "/projects/:projectId",
+            children: [
+              {
+                path: "tasks",
+                element: <TasksPage />,
+              },
+              {
+                path: "dashboard",
+                element: <DashboardPage />,
+              },
+              {
+                path: "users",
+                element: <UsersPage />,
+              },
+            ],
+          },
+          {
+            path: "/profile/:userId",
+            element: <></>,
           },
         ],
       },
       {
-        path: "/profile/:userId",
-        element: <></>,
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },

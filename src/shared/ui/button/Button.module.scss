@@ -19,7 +19,7 @@
 
     &:hover {
       background-color: $base-blue;
-      color: $dark-blue
+      color: $dark-blue;
     }
   }
 
@@ -27,6 +27,11 @@
     color: $dark-blue;
     border-color: $base-blue;
     background-color: $base-blue;
+
+    &:hover {
+      background-color: transparent;
+      color: $base-white;
+    }
   }
 
   &_glass {
@@ -41,13 +46,13 @@
   }
 
   &_danger {
-    color: $base-danger;
-    border-color: $base-danger;
-    background: transparent;
+    color: $dark-blue;
+    border-color: $base-red;
+    background: $base-red;
 
     &:hover {
-      color: $dark-blue;
-      background-color: $base-danger;
+      color: $base-red;
+      background-color: transparent;
     }
   }
 

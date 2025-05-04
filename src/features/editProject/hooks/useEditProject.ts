@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { editProject } from "features/editProject/api/api.ts";
-import { Project } from "entities/project";
 import { AxiosError } from "axios";
 import { TEditProjectRequestData } from "features/editProject/api/types.ts";
 import toast from "react-hot-toast";
+import { Project } from "shared/types";
 
 type TEditProjectData = {
   projectId: string;

@@ -1,0 +1,50 @@
+@use "shared/styles/variables" as *;
+
+.container {
+  background-color: $base-glass;
+  backdrop-filter: blur(15px);
+  padding: 16px 0 0 0;
+  gap: 16px;
+  border-radius: 15px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-width: 260px;
+  max-width: 800px;
+  min-height: 200px;
+
+  .container_header {
+    font-size: 1.5em;
+    font-weight: 600;
+    text-transform: uppercase;
+    display: flex;
+    padding: 5px 8px 5px 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tasks_list_wrapper {
+    position: relative;
+    height: 100%;
+
+    .tasks_list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+      margin: 0;
+      overflow-y: auto;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+
+      scrollbar-width: thin;
+      scrollbar-color: $light-grey transparent;
+      scrollbar-gutter: stable;
+      border-right: solid 2px transparent;
+    }
+  }
+}

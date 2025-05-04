@@ -1,0 +1,58 @@
+@use "shared/styles/variables" as *;
+
+.loader {
+  display: flex;
+  justify-content: center;
+}
+
+.tasks_list {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  overflow-y: auto;
+  height: 100%;
+  text-align: center;
+
+  scrollbar-width: thin;
+  scrollbar-color: $light-grey transparent;
+
+  .task {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr 2fr 1fr;
+    align-items: center;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: $base-glass;
+    border: 1px solid $base-glass;
+    border-radius: 10px;
+    cursor: pointer;
+    gap: 1em;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: $base-glass-hover;
+    }
+
+    .task_title {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .author_block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.8em;
+
+      .author_avatar {
+        height: 1.5em;
+      }
+    }
+  }
+
+  .no_task {
+    font-size: 1.5em;
+    text-align: center;
+  }
+}

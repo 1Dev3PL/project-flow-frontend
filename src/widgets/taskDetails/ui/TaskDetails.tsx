@@ -5,12 +5,15 @@ import {
   useTask,
   useUpdateTask,
 } from "entities/task";
-import { Drawer, Input, Select, TextArea } from "shared/ui";
+import { Drawer, IconButton, Input, Select, TextArea } from "shared/ui";
 import style from "./taskDetails.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { ETaskPriority, ETaskStatus, ETaskType, User } from "shared/types";
 import { UserSelect } from "features/selectUser";
 import userIcon from "shared/assets/icons/avatar.svg";
+import closeIcon from "shared/assets/icons/close.svg";
+import deleteIcon from "shared/assets/icons/delete.svg";
+import { DeleteTaskModal } from "features/deleteTask";
 
 interface Props {
   taskId: string | null;
@@ -23,11 +26,12 @@ export const TaskDetails = (props: Props) => {
   const { task, isLoading } = useTask(taskId);
   const { updateTaskMutation } = useUpdateTask();
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const [title, setTitle] = useState("");
   const [isTitleEdit, setIsTitleEdit] = useState(false);
   const titleRef = useRef<HTMLInputElement>(null);
   const [titleError, setTitleError] = useState<string>("");
-
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -135,6 +139,16 @@ export const TaskDetails = (props: Props) => {
 
   return (
     <Drawer id="task-details-drawer-container" open={open} onClose={onClose}>
+      <div className={style.header}>
+        <IconButton
+          icon={deleteIcon}
+          alt={"delete"}
+          onClick={() => setIsDeleteModalOpen(true)}
+        />
+        <button className={style.close_button} onClick={onClose}>
+          <img className={style.close_icon} src={closeIcon} alt={"close"} />
+        </button>
+      </div>
       <div className={style.content}>
         {isLoading ? (
           <div>Loading...</div>
@@ -200,6 +214,14 @@ export const TaskDetails = (props: Props) => {
           </>
         )}
       </div>
+      <DeleteTaskModal
+        open={isDeleteModalOpen}
+        handleClose={() => {
+          setIsDeleteModalOpen(false);
+        }}
+        onDelete={handleClose}
+        taskId={task?.id || null}
+      />
     </Drawer>
   );
 };
