@@ -2,6 +2,7 @@ import { Dialog, styled } from "@mui/material";
 import style from "./Modal.module.scss";
 import React, { ReactNode } from "react";
 import closeIcon from "shared/assets/icons/close.svg";
+import { IconButton } from "shared/ui";
 
 const CustomDialog = styled(Dialog)(() => ({
   "& .MuiDialogContent-root": {
@@ -30,16 +31,10 @@ export const Modal = (props: Props) => {
 
   return (
     <>
-      <CustomDialog
-        open={open}
-        onClose={onClose}
-        onClick={onClick}
-      >
+      <CustomDialog open={open} onClose={onClose} onClick={onClick}>
         <div className={style.modal_header}>
           {title && <h2 className={style.title}>{title}</h2>}
-          <button className={style.close_button} onClick={onClose}>
-            <img src={closeIcon} alt={""} className={style.close_icon} />
-          </button>
+          <IconButton icon={closeIcon} alt={"close"} onClick={onClose} />
         </div>
         {children}
       </CustomDialog>

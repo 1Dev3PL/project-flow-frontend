@@ -11,18 +11,4 @@
     margin: 0;
     flex: 1;
   }
-
-  .close_button {
-    background-color: transparent;
-    align-self: flex-start;
-    border: none;
-    height: 30px;
-    padding: 0;
-    cursor: pointer;
-
-    .close_icon {
-      width: 30px;
-      height: 30px;
-    }
-  }
 }

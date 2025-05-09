@@ -1,4 +1,4 @@
-import { Task } from "shared/types";
+import { ETaskStatus, Task } from "shared/types";
 
 export type TDashboardTasksResponse = {
   open: Task[];
@@ -7,3 +7,10 @@ export type TDashboardTasksResponse = {
   testing: Task[];
   complete: Task[];
 };
+
+export type TTaskPositionRequestData = {
+  taskId: string;
+  status?: ETaskStatus;
+  afterId: string | null;
+  beforeId: string | null;
+}

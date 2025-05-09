@@ -43,9 +43,10 @@ import {
 } from "pages/dashboard/hooks/useDashboardTasks.ts";
 import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
 import { CircularProgress } from "@mui/material";
-import { taskStatusNames, useUpdateTask } from "entities/task";
+import { taskStatusNames } from "entities/task";
 import { TaskDetails } from "widgets/taskDetails";
 import style from "./Dashboard.module.scss";
+import { useChangeTaskPosition } from "pages/dashboard/hooks/useChangeTaskPosition.ts";
 
 const dropAnimation: DropAnimation = {
   sideEffects: defaultDropAnimationSideEffects({
@@ -60,7 +61,7 @@ const dropAnimation: DropAnimation = {
 export function Dashboard() {
   const projectId = useCurrentProjectStore((state) => state.currentProjectId);
   const { dashboardTasks, isLoading } = useDashboardTasks(projectId);
-  const { updateTaskMutation } = useUpdateTask();
+  const { changeTaskPositionMutation } = useChangeTaskPosition();
   const [tasks, setTasks] = useState<TDashboardTasks>({
     [ETaskStatus.OPEN]: [],
     [ETaskStatus.IN_PROGRESS]: [],
@@ -253,19 +254,48 @@ export function Dashboard() {
     const overContainer = findContainer(overId);
 
     if (overContainer) {
-      if (draggableTaskData!.status != overContainer) {
-        updateTaskMutation({
-          taskId: String(active.id),
-          status: overContainer as ETaskStatus,
-        });
-      }
-
       const activeIndex = tasks[activeContainer].findIndex(
         (task) => task.id == active.id,
       );
       const overIndex = tasks[overContainer].findIndex(
         (task) => task.id == overId,
       );
+
+      const overTask = tasks[overContainer][overIndex];
+      let afterId = null;
+      let beforeId = null;
+
+      if (
+        draggableTaskData!.status != overContainer &&
+        overTask.id == draggableTaskData!.id
+      ) {
+        afterId = overIndex > 0 ? tasks[overContainer][overIndex - 1].id : null;
+        beforeId =
+          overIndex < tasks[overContainer].length - 1
+            ? tasks[overContainer][overIndex + 1].id
+            : null;
+      } else if (activeIndex < overIndex) {
+        afterId = overTask.id;
+        beforeId =
+          overIndex < tasks[overContainer].length - 1
+            ? tasks[overContainer][overIndex + 1].id
+            : null;
+      } else if (activeIndex > overIndex) {
+        afterId = overIndex > 0 ? tasks[overContainer][overIndex - 1].id : null;
+        beforeId = overTask.id;
+      }
+
+      if (afterId != beforeId || draggableTaskData!.status != overContainer) {
+        changeTaskPositionMutation({
+          taskId: String(active.id),
+          status:
+            draggableTaskData!.status != overContainer
+              ? (overContainer as ETaskStatus)
+              : undefined,
+          beforeId,
+          afterId,
+        });
+      }
 
       if (activeIndex !== overIndex) {
         setTasks((tasks) => ({

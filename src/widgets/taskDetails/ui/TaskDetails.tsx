@@ -145,9 +145,7 @@ export const TaskDetails = (props: Props) => {
           alt={"delete"}
           onClick={() => setIsDeleteModalOpen(true)}
         />
-        <button className={style.close_button} onClick={onClose}>
-          <img className={style.close_icon} src={closeIcon} alt={"close"} />
-        </button>
+        <IconButton icon={closeIcon} alt={"close"} onClick={onClose} />
       </div>
       <div className={style.content}>
         {isLoading ? (
