@@ -1,5 +1,5 @@
 import { apiInstance } from "shared/api";
-import { Project } from "entities/project";
+import { Project } from "shared/types";
 
 export const getProjects = async (): Promise<Project[]> => {
   return await apiInstance.get(`/projects`).then((res) => res.data);

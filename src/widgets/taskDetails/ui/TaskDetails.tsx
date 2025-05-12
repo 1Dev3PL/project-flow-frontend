@@ -6,7 +6,7 @@ import {
   useUpdateTask,
 } from "entities/task";
 import { Drawer, IconButton, Input, Select, TextArea } from "shared/ui";
-import style from "./taskDetails.module.scss";
+import style from "./TaskDetails.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { ETaskPriority, ETaskStatus, ETaskType, User } from "shared/types";
 import { UserSelect } from "features/selectUser";

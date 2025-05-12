@@ -1,6 +1,6 @@
 import { apiInstance } from "shared/api";
-import { Project } from "entities/project";
 import { TEditProjectRequestData } from "features/editProject/api/types.ts";
+import { Project } from "shared/types";
 
 export const editProject = async (
   projectId: string,

@@ -7,8 +7,8 @@ import { expect } from "vitest";
 
 describe("TasksPage", () => {
   it("no tasks renders correctly", async () => {
-    nock("http://localhost:8081").get("/tasks").reply(200, []);
-    nock("http://localhost:8081").get("/auth/data").reply(200, {
+    nock("http://localhost:8080/api").get("/tasks").reply(200, []);
+    nock("http://localhost:8080/api").get("/auth/data").reply(200, {
       id: "test",
       name: "Test User",
       email: "test@testing.com",
