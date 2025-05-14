@@ -1,11 +1,8 @@
 /// <reference types="vite/client" />
+import { ImportMetaEnv } from "vite/types/importMeta";
 
 interface ViteTypeOptions {
   strictImportMetaEnv: unknown;
-}
-
-interface ImportMetaEnv {
-  readonly VITE_SERVER_URL: string;
 }
 
 interface ImportMeta {

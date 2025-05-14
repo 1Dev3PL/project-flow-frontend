@@ -3,8 +3,6 @@ FROM node:20 AS build
 WORKDIR /app
 COPY . .
 RUN npm install
-ARG VITE_SERVER_URL
-ENV VITE_SERVER_URL=$VITE_SERVER_URL
 RUN npm run build
 
 FROM nginx:alpine
