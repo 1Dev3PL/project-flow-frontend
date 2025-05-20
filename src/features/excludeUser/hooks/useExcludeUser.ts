@@ -19,6 +19,8 @@ export const useExcludeUser = () => {
     mutationFn: ({ projectId, userId }) => excludeUser(projectId, userId),
     onSettled: (_, __, { projectId }) => {
       queryClient.invalidateQueries({ queryKey: ["users", projectId] });
+      queryClient.invalidateQueries({ queryKey: ["tasks", projectId] });
+      queryClient.invalidateQueries({ queryKey: ["task"] });
     },
     onSuccess: () => {
       toast.success(`Пользователь исключен`);

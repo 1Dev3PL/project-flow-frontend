@@ -28,14 +28,14 @@ export const useChangeRole = () => {
       changeRole(projectId, userId, roleData),
     onMutate: async ({ projectId, userId, roleData }) => {
       await queryClient.cancelQueries({
-        queryKey: ["users", projectId],
+        queryKey: ["users", projectId, "with-role"],
       });
 
       const previousUsers: InfiniteData<ProjectUser[]> | undefined =
-        queryClient.getQueryData(["users", projectId]);
+        queryClient.getQueryData(["users", projectId, "with-role"]);
 
       queryClient.setQueryData(
-        ["users", projectId],
+        ["users", projectId, "with-role"],
         (oldUsers: InfiniteData<ProjectUser[]> | undefined) => {
           return {
             pageParams: oldUsers?.pageParams,
@@ -51,14 +51,14 @@ export const useChangeRole = () => {
       return { previousUsers };
     },
     onSettled: (_, __, { projectId }) => {
-      queryClient.invalidateQueries({ queryKey: ["users", projectId] });
+      queryClient.invalidateQueries({ queryKey: ["users", projectId, "with-role"] });
     },
     onSuccess: () => {
       toast.success(`Роль изменена`);
     },
     onError: (_, { projectId }, context) => {
       if (context?.previousUsers) {
-        queryClient.setQueryData(["users", projectId], context.previousUsers);
+        queryClient.setQueryData(["users", projectId, "with-role"], context.previousUsers);
       }
       toast.error(`Что-то пошло не так`);
     },

@@ -9,7 +9,7 @@ export const useProjectUsers = (projectId: string | null) => {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ["project-users", projectId],
+    queryKey: ["users", projectId, "with-role"],
     queryFn: (meta) => getProjectUsers(projectId!, { page: meta.pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, _, lastPageParam) => {

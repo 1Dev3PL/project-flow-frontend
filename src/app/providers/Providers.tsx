@@ -10,6 +10,7 @@ import { Toaster } from "react-hot-toast";
 import { router } from "app/router/Router.tsx";
 import { RouterProvider } from "react-router";
 import { AxiosError } from "axios";
+import { Fallback } from "app/providers/Fallback.tsx";
 
 const handleTokensExpired = (error: Error) => {
   const err = error as AxiosError;
@@ -39,7 +40,7 @@ const queryClient = new QueryClient({
 export const Providers = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<>Loading...</>}>
+      <Suspense fallback={<Fallback />}>
         <RouterProvider router={router} />
       </Suspense>
       <ReactQueryDevtools initialIsOpen={false} />

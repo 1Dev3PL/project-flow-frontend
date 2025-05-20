@@ -3,6 +3,7 @@ import { AxiosError } from "axios";
 import { deleteProject } from "features/deleteProject/api/api.ts";
 import toast from "react-hot-toast";
 import { Project } from "shared/types";
+import { useCurrentProjectStore } from "shared/model/currentProject/currentProjectStore.ts";
 
 type TDeleteProjectData = {
   projectId: string;
@@ -10,6 +11,12 @@ type TDeleteProjectData = {
 
 export const useDeleteProject = () => {
   const queryClient = useQueryClient();
+  const currentProjectId = useCurrentProjectStore(
+    (state) => state.currentProjectId,
+  );
+  const removeCurrentProjectId = useCurrentProjectStore(
+    (state) => state.removeCurrentProjectId,
+  );
 
   const { mutate: deleteProjectMutation, isPending } = useMutation<
     void,
@@ -28,6 +35,9 @@ export const useDeleteProject = () => {
         (projects: Project[] | undefined) =>
           projects?.filter((project) => project.id !== projectId),
       );
+      if (currentProjectId == projectId) {
+        removeCurrentProjectId();
+      }
 
       toast.success(`Проект удален`);
     },
