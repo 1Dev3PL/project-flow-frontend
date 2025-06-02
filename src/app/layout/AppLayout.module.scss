@@ -1,4 +1,10 @@
+@use "shared/styles/mixins" as *;
+
 .page_layout {
   display: flex;
   height: 100%;
+
+  @include phone {
+    flex-direction: column;
+  }
 }

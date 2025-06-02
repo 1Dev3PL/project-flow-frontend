@@ -8,10 +8,11 @@ interface Props {
   icon?: string;
   children?: string;
   end?: boolean;
+  onClick?: () => void;
 }
 
 export const NavButton = (props: Props) => {
-  const { className, children, to, icon, end = false } = props;
+  const { className, children, to, icon, end = false, onClick } = props;
 
   return (
     <NavLink
@@ -22,6 +23,7 @@ export const NavButton = (props: Props) => {
       }}
       to={to}
       end={end}
+      onClick={onClick}
     >
       {icon && <img className={style.icon} src={icon} alt={""} />}
       {children}

@@ -1,8 +1,6 @@
 @use "shared/styles/variables" as *;
 
 .icon_button {
-  display: flex;
-  align-items: center;
   background: transparent;
   clip-path: circle();
   border: none;

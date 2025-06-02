@@ -34,9 +34,11 @@ export const SignInPage = () => {
     <div className={style.login_page}>
       <div className={style.login_modal}>
         <div className={style.left_container}>
-          <div className={style.welcome_text}>Добро пожаловать в</div>
-          <div className={style.logo_container}>
-            <img src={logo} alt={""} className={style.logo} />
+          <div className={style.welcome_block}>
+            <div className={style.welcome_text}>Добро пожаловать в</div>
+            <div className={style.logo_container}>
+              <img src={logo} alt={""} className={style.logo} />
+            </div>
           </div>
         </div>
         <div className={style.right_container}>
@@ -60,7 +62,8 @@ export const SignInPage = () => {
               register={register("email", {
                 required: "Введите email",
                 pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]{2,4}$/,
+                  value:
+                    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]{2,4}$/,
                   message: "Введите валидную почту",
                 },
               })}

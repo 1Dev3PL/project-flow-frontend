@@ -1,0 +1,17 @@
+// Phones
+$screen-sm-max: 768px;
+
+// Tablets and small desktops
+$screen-md-max: 1200px;
+
+@mixin phone {
+  @media (max-width: #{$screen-sm-max}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$screen-md-max}) {
+    @content;
+  }
+}

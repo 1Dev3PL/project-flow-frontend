@@ -1,52 +1,60 @@
 @use "shared/styles/variables" as *;
+@use "shared/styles/mixins" as *;
 
 .sidebar {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
   background-color: $base-glass;
   backdrop-filter: blur(15px);
   width: 250px;
   padding: 30px 20px;
   box-sizing: border-box;
-  justify-content: space-between;
+  gap: 8em;
+
+  @include tablet {
+    width: 200px;
+  }
+
+  @include phone {
+    flex-direction: row;
+    align-items: center;
+    width: unset;
+    height: unset;
+    padding: 1.5em 2em;
+  }
 
   .logo_container {
     display: flex;
     justify-content: center;
 
+    @include phone {
+      flex-direction: row;
+    }
+
     .logo {
       width: 100px;
+
+      @include phone {
+        width: 60px;
+      }
     }
   }
 
-  .navigation {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
+  .navigation_wrapper {
+    height: 100%;
+
+    @include phone {
+      display: none;
+    }
   }
 
-  .create_project_button {
-    font-family: "OpenSans", sans-serif;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    gap: 1em;
-    border-radius: 10px;
-    text-decoration: none;
-    color: $base-white;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
+  .mobile_menu_button {
+    display: none;
 
-    &:hover {
-      background-color: $base-glass;
-    }
-
-    .icon {
-      height: 1.5em;
+    @include phone {
+      display: unset;
     }
   }
 }

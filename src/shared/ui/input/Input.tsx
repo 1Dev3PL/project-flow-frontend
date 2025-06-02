@@ -65,7 +65,12 @@ const InputWithRef = <T extends FieldValues>(
           {...register}
         />
         {type === "password" && (
-          <span className={style.visibility_toggle} onClick={toggleVisibility}>
+          <span
+            className={style.visibility_button}
+            tabIndex={0}
+            role={"button"}
+            onClick={toggleVisibility}
+          >
             <img src={visibilityIcon} alt={""} />
           </span>
         )}

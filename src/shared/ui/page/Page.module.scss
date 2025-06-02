@@ -1,3 +1,5 @@
+@use "shared/styles/variables" as *;
+
 .page {
   display: flex;
   flex-direction: column;
@@ -6,4 +8,5 @@
   flex: 1;
   overflow: auto;
   box-sizing: border-box;
+  scrollbar-color: $light-grey transparent;
 }
