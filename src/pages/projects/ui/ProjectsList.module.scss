@@ -6,8 +6,8 @@
 }
 
 .projects_list {
-  display: flex;
-  flex-flow: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 2em;
 
   .add_project_card {
@@ -22,7 +22,6 @@
     background-color: $base-glass;
     backdrop-filter: blur(15px);
     height: 200px;
-    width: 360px;
     transition: background-color 0.2s;
 
     &:hover {

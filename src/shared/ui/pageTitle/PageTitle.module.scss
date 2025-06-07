@@ -1,5 +1,15 @@
+@use "shared/styles/mixins" as *;
+
 .title {
-  margin: 1em 2rem;
+  margin: 1em;
   font-size: 3rem;
   text-transform: uppercase;
+
+  @include tablet {
+    font-size: 2rem;
+  }
+
+  @include phone {
+    font-size: 1rem;
+  }
 }

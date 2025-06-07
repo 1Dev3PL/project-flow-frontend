@@ -4,6 +4,7 @@ import { CreateProjectModal } from "features/createProject";
 import { DeleteProjectModal } from "features/deleteProject";
 import { EditProjectModal } from "features/editProject";
 import { ProjectsList } from "pages/projects/ui/ProjectsList.tsx";
+import style from "./ProjectsPage.module.scss";
 
 export const ProjectsPage = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -26,7 +27,9 @@ export const ProjectsPage = () => {
 
   return (
     <Page>
-      <PageTitle>Все проекты</PageTitle>
+      <div className={style.header}>
+        <PageTitle>Все проекты</PageTitle>
+      </div>
       <ProjectsList
         onCreateProjectClick={handleCreateProjectClick}
         onEditProjectClick={handleEditProjectClick}

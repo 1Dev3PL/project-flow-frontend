@@ -8,44 +8,41 @@
   height: 100%;
   background-color: $base-glass;
   backdrop-filter: blur(15px);
-  width: 250px;
+  width: 230px;
   padding: 30px 20px;
   box-sizing: border-box;
-  gap: 8em;
+  gap: 4em;
 
   @include tablet {
-    width: 200px;
-  }
-
-  @include phone {
     flex-direction: row;
     align-items: center;
     width: unset;
     height: unset;
-    padding: 1.5em 2em;
+    padding: 1em 2em;
   }
 
   .logo_container {
     display: flex;
     justify-content: center;
+    height: 8em;
 
-    @include phone {
+    @include tablet {
       flex-direction: row;
+      height: 3em;
     }
 
     .logo {
-      width: 100px;
-
-      @include phone {
-        width: 60px;
-      }
+      height: 100%;
     }
   }
 
-  .navigation_wrapper {
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     height: 100%;
 
-    @include phone {
+    @include tablet {
       display: none;
     }
   }
@@ -53,7 +50,7 @@
   .mobile_menu_button {
     display: none;
 
-    @include phone {
+    @include tablet {
       display: unset;
     }
   }

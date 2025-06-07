@@ -1,7 +1,9 @@
 import { IconButton, Portal } from "shared/ui";
 import style from "./MobileNavigation.module.scss";
-import { Navigation } from "widgets/sidebar/ui/Navigation.tsx";
 import closeIcon from "shared/assets/icons/close.svg";
+import { NavLinks } from "widgets/sidebar/ui/NavLinks.tsx";
+import { CurrentProjectInfo } from "widgets/sidebar/ui/CurrentProjectInfo.tsx";
+import { UserInfo } from "widgets/sidebar/ui/UserInfo.tsx";
 
 interface Props {
   open: boolean;
@@ -12,14 +14,18 @@ export const MobileNavigation = (props: Props) => {
   const { open, onClose } = props;
 
   return open ? (
-    <Portal id={"test-aboba"}>
+    <Portal id={"mobile-navigation"}>
       <div
-        className={style.mobile_navigation}
+        className={style.container}
       >
         <div className={style.header}>
           <IconButton icon={closeIcon} alt={"close"} onClick={onClose}/>
         </div>
-        <Navigation onSelect={onClose}/>
+        <nav className={style.navigation}>
+          <NavLinks onSelect={onClose} />
+          <CurrentProjectInfo onClick={onClose} />
+          <UserInfo onClick={onClose} />
+        </nav>
       </div>
     </Portal>
   ) : null;

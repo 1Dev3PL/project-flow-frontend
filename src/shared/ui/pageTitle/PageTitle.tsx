@@ -1,6 +1,13 @@
-import { ReactNode } from "react";
 import style from "./PageTitle.module.scss";
+import classNames from "classnames";
 
-export const PageTitle = ({ children }: { children: ReactNode }) => {
-  return <h1 className={style.title}>{children}</h1>;
+interface Props {
+  children: string;
+  className?: string;
+}
+
+export const PageTitle = (props: Props) => {
+  const { children, className } = props;
+
+  return <h1 className={classNames(style.title, className)}>{children}</h1>;
 };
