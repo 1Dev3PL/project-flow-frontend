@@ -9,7 +9,7 @@ import { useCurrentProjectStore } from "shared/model/currentProject/currentProje
 type TUpdateTaskData = {
   taskId: string;
   executor?: User | null;
-} & TUpdateTaskRequestData;
+} & Omit<TUpdateTaskRequestData, "executorId">;
 
 export const useUpdateTask = () => {
   const queryClient = useQueryClient();
@@ -24,8 +24,8 @@ export const useUpdateTask = () => {
     { previousTask?: Task }
   >({
     mutationFn: ({ taskId, executor, ...taskData }) =>
-      updateTask(taskId, taskData),
-    onMutate: async ({ taskId, executorId, ...taskData }) => {
+      updateTask(taskId, { ...taskData, executorId: executor?.id || "" }),
+    onMutate: async ({ taskId, ...taskData }) => {
       await queryClient.cancelQueries({
         queryKey: ["task", taskId],
       });

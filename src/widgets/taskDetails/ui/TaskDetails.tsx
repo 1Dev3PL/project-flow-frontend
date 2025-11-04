@@ -76,7 +76,6 @@ export const TaskDetails = (props: Props) => {
     updateTaskMutation({
       taskId: task!.id,
       executor: executor,
-      executorId: executor?.id || "",
     });
   };
 
